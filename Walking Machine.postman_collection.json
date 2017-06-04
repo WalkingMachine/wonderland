@@ -1,0 +1,62 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Walking Machine",
+		"_postman_id": "f8f7f49b-a75f-e970-6bbd-bc6a2b3791be",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all entities",
+			"request": {
+				"url": "localhost:8000/api/entity/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "asdf",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "GET LIST"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all objects",
+			"request": {
+				"url": "localhost:8000/api/object/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "asdf",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "GET LIST"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all human",
+			"request": {
+				"url": "localhost:8000/api/human/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "asdf",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "GET LIST"
+			},
+			"response": []
+		}
+	]
+}
