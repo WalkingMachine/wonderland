@@ -27,18 +27,18 @@ Thing you need to install
 
 ## Installation
 1. First you have to install every python requirement
-```
+```bash
 pip install -r requirements.txt
 ```
 
 2. Migration
-```
+```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 3. Run server
-```
+```bash
 python manage.py runserver
 ```
 
@@ -46,13 +46,18 @@ python manage.py runserver
 
 ### PostMan
 *Recommendation*
+1. Installation see [here](https://www.getpostman.com/)
 
-Import `Walking Machine.postman_collection`
+2. From Postman import `Walking Machine.postman_collection` located [here](../master/Walking%20Machine.postman_collection.json)
 
 ### CURL
 *TODO*
-### Wget
-*TODO*
+
+## TODO
+- [ ] Make an Action list
+- [ ] Make an API list
+- [ ] Edit Model
+- [ ] Add test File
 
 ## LICENCE
 Apache License 2.0
