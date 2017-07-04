@@ -1,0 +1,12 @@
+language: python
+
+python:
+  - 3.5
+
+install:
+  - pip install -r requirements.txt
+  - pip install pep8
+
+script:
+  - python3 manage.py test
+  - pep8 --count --show-source --exclude=migrations .
