@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 import manage as main
 
+
 class EntityList(APIView):
     ''' List all Entity or create a new entity. '''
 
@@ -24,6 +25,7 @@ class EntityList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class HumanList(APIView):
     ''' List all Human. '''
 
@@ -38,6 +40,7 @@ class HumanList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ObjectList(APIView):
     ''' List all Object. '''
