@@ -98,16 +98,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
@@ -127,7 +127,7 @@ USE_TZ = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-from corsheaders.defaults import default_headers
+from corsheaders.defaults import default_headers  # noqa
 
 CORS_ALLOW_HEADERS = default_headers + (
     'api-key',
@@ -138,5 +138,5 @@ CORS_ALLOW_HEADERS = default_headers + (
 
 STATIC_URL = '/static/'
 
-import django
+import django  # noqa
 django.setup()
