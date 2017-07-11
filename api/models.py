@@ -23,6 +23,7 @@ class Human(models.Model):
     def __str__(self):
         return "{}".format(self.person_name)
 
+
 class Object(models.Model):
     id = models.AutoField(primary_key=True)
     entity = models.ForeignKey(Entity, null=True)
@@ -31,6 +32,7 @@ class Object(models.Model):
 
     def __str__(self):
         return "{}".format(self.type)
+
 
 class Room(models.Model):
     id = models.AutoField(primary_key=True)
@@ -47,3 +49,10 @@ class Room(models.Model):
     y4 = models.FloatField()
 
     room_name = models.CharField(max_length=50)
+
+
+class Waypoint(models.Model):
+    id = models.AutoField(primary_key=True)
+    entity = models.ForeignKey(Entity, null=True)
+    x_position = models.FloatField()
+    y_position = models.FloatField()
