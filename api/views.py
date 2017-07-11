@@ -1,5 +1,7 @@
 from api.models import Entity, Human, Object, Room, Waypoint
-from api.serializers import EntitySerializer, HumanSerializer, ObjectSerializer, RoomSerializer, WaypointSerializer
+from api.serializers import EntitySerializer, HumanSerializer
+from api.serializers import ObjectSerializer, RoomSerializer
+from api.serializers import WaypointSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,6 +13,7 @@ import manage as main
 
 
 class EntityList(APIView):
+
     ''' List all Entity or create a new entity. '''
 
     def get(self, request, format=None):
@@ -27,6 +30,7 @@ class EntityList(APIView):
 
 
 class HumanList(APIView):
+
     ''' List all Human. '''
 
     def get(self, request, format=None):
@@ -43,6 +47,7 @@ class HumanList(APIView):
 
 
 class ObjectList(APIView):
+
     ''' List all Object. '''
 
     def get(self, request, format=None):
@@ -72,7 +77,9 @@ class RoomList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class WaypointList(APIView):
+
     def get(self, request, format=None):
         waypoints = Waypoint.objects.all()
         serializer = WaypointSerializer(waypoints, many=True)
