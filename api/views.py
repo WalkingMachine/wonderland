@@ -1,5 +1,5 @@
-from api.models import Entity, Human, Object
-from api.serializers import EntitySerializer, HumanSerializer, ObjectSerializer
+from api.models import Entity, Human, Object, Room, Waypoint
+from api.serializers import EntitySerializer, HumanSerializer, ObjectSerializer, RoomSerializer, WaypointSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -55,4 +55,32 @@ class ObjectList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RoomList(APIView):
+
+    def get(self, request, format=None):
+        rooms = Room.objects.all()
+        serializer = RoomSerializer(rooms, many=True)
+        return Reponse(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = RoomSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class WaypointList(APIView):
+    def get(self, request, format=None):
+        waypoints = Waypoint.objects.all()
+        serializer = WaypointSerializer(waypoints, many=True)
+        return Reponse(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = WaypointSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Reponse(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
