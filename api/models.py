@@ -31,3 +31,19 @@ class Object(models.Model):
 
     def __str__(self):
         return "{}".format(self.type)
+
+class Room(models.Model):
+    id = models.AutoField(primary_key=True)
+    entity = models.ForeignKey(Entity, null=True)
+
+    x1 = models.FloatField()
+    x2 = models.FloatField()
+    x3 = models.FloatField()
+    x4 = models.FloatField()
+
+    y1 = models.FloatField()
+    y2 = models.FloatField()
+    y3 = models.FloatField()
+    y4 = models.FloatField()
+
+    room_name = models.CharField(max_length=50)
