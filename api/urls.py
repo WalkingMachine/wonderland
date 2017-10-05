@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^api/object/$', views.ObjectList.as_view()),
     url(r'^api/room/$', views.RoomList.as_view()),
     url(r'^api/waypoint/$', views.WaypointList.as_view()),
+    url(r'^api/artag/$', views.ArTagList.as_view()),
 ]

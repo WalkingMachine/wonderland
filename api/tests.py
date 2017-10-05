@@ -1,5 +1,5 @@
 from django.test import TestCase
-from api.models import Entity, Human, Object
+from api.models import Entity, Human, Object, ArTag
 # Create your tests here.
 
 
@@ -29,6 +29,15 @@ class EntityTest(TestCase):
             entity=cls.entity_object
         )
 
+        cls.entity_artag = Entity.objects.create(
+            name="entity_artag",
+            time=None
+        )
+
+        cls.ar_tag = ArTag.objects.create(
+            entity=cls.entity_artag
+        )
+
     def testEntityCreation(self):
         entity = self.entity
         self.assertEqual(entity.name, "entity_test")
@@ -40,3 +49,7 @@ class EntityTest(TestCase):
     def testObjectCreation(self):
         object = self.object
         self.assertEqual(object.entity.name, "entity_object")
+
+    def testArTagCreation(self):
+        ar_tag = self.ar_tag
+        self.assertEqual(ar_tag.entity.name, "entity_artag")
