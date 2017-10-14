@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import Entity, Human, Object, Room, Waypoint
+from .models import Entity, Human, Object, Room, Waypoint, ArTag
 
 
 class EntitySerializer(serializers.ModelSerializer):
@@ -41,3 +41,11 @@ class WaypointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Waypoint
         fields = ('entity', 'x_position', 'y_position')
+
+
+class ArTagSerializer(serializers.ModelSerializer):
+    entity = EntitySerializer(read_only=True)
+
+    class Meta:
+        model = ArTag
+        fields = ('entity', 'ar_id')

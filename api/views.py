@@ -1,7 +1,7 @@
-from api.models import Entity, Human, Object, Room, Waypoint
+from api.models import Entity, Human, Object, Room, Waypoint, ArTag
 from api.serializers import EntitySerializer, HumanSerializer
 from api.serializers import ObjectSerializer, RoomSerializer
-from api.serializers import WaypointSerializer
+from api.serializers import WaypointSerializer, ArTagSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -90,4 +90,19 @@ class WaypointList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Reponse(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ArTagList(APIView):
+
+    def get(self, request, format=None):
+        artag = ArTag.objects.all()
+        serializer = ArTagSerializer(artag, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = ArTagSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

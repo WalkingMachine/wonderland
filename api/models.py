@@ -56,3 +56,12 @@ class Waypoint(models.Model):
     entity = models.ForeignKey(Entity, null=True)
     x_position = models.FloatField()
     y_position = models.FloatField()
+
+
+class ArTag(models.Model):
+    id = models.AutoField(primary_key=True)
+    entity = models.ForeignKey(Entity, null=True)
+    ar_id = models.IntegerField(null=True)
+
+    def __str__(self):
+        return "{}".format(self.entity.name)
