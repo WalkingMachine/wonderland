@@ -63,7 +63,7 @@ class ObjectList(APIView):
         if color is not None:
             objects = objects.filter(color__icontains=str(color))
         if room is not None:
-            objects = objects.filter(room__room_name__icontains=str(room))
+            objects = objects.filter(room__name__icontains=str(room))
         if type is not None:
             objects = objects.filter(type__icontains=str(type))
         if id is not None:
