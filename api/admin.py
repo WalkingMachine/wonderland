@@ -1,8 +1,7 @@
 from django.contrib import admin
-from api.models import Entity, Object, Human, ArTag
+from api.models import Entity, Object, Human, Room
 
 # Register your models here.
-admin.site.register(Entity)
 admin.site.register(Object)
 admin.site.register(Human)
-admin.site.register(ArTag)
+admin.site.register(Room)

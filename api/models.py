@@ -16,58 +16,60 @@ class Entity(models.Model):
 
 class Human(models.Model):
     id = models.AutoField(primary_key=True)
-    entity = models.ForeignKey(Entity, null=True)
+    name = models.CharField(max_length=50, default='')
     gender = models.CharField(max_length=1, null=True)
-    person_name = models.CharField(max_length=60, null=True)
+    x_position = models.FloatField(null=True)
+    y_position = models.FloatField(null=True)
+    z_position = models.FloatField(null=True)
 
     def __str__(self):
-        return "{}".format(self.person_name)
+        return "{}".format(self.name)
+
+class Room(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=60, default='')
+    type = models.CharField(max_length=20, null=True)
+
+    x_position = models.FloatField()
+    y_position = models.FloatField()
+    z_position = models.FloatField(null=True)
+    def __str__(self):
+        return "{}".format(self.name)
 
 
 class Object(models.Model):
     id = models.AutoField(primary_key=True)
-    entity = models.ForeignKey(Entity, null=True)
-    type = models.CharField(max_length=20, null=True)
-    color = models.CharField(max_length=20, null=True)
+    name = models.CharField(max_length=50, default='')
+    type = models.CharField(max_length=50, null=True, blank=True)
+    color = models.CharField(max_length=20, null=True, blank=True)
+    room = models.ForeignKey(Room, models.SET_NULL, null=True, blank=True)
+
+    x_position = models.FloatField(null=True, blank=True)
+    y_position = models.FloatField(null=True, blank=True)
+    z_position = models.FloatField(null=True, blank=True)
+    theta = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return "{}".format(self.type)
-
-
-class Room(models.Model):
-    id = models.AutoField(primary_key=True)
-    entity = models.ForeignKey(Entity, null=True)
-
-    x1 = models.FloatField()
-    x2 = models.FloatField()
-    x3 = models.FloatField()
-    x4 = models.FloatField()
-
-    y1 = models.FloatField()
-    y2 = models.FloatField()
-    y3 = models.FloatField()
-    y4 = models.FloatField()
-
-    room_name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return "{}".format(self.room_name)
-
+        return "{}".format(self.name)
 
 class Waypoint(models.Model):
     id = models.AutoField(primary_key=True)
-    entity = models.ForeignKey(Entity, null=True)
+    name = models.CharField(max_length=60, default='')
     x_position = models.FloatField()
     y_position = models.FloatField()
 
     def __str__(self):
-        return "{}".format(self.entity.name)
+        return "{}".format(self.name)
 
 
 class ArTag(models.Model):
     id = models.AutoField(primary_key=True)
-    entity = models.ForeignKey(Entity, null=True)
+    name = models.CharField(max_length=60, default='')
     ar_id = models.IntegerField(null=True)
+    x_position = models.FloatField(null=True)
+    y_position = models.FloatField(null=True)
+    z_position = models.FloatField(null=True)
+    theta = models.FloatField(null=True)
 
     def __str__(self):
-        return "{}".format(self.entity.name)
+        return "{}".format(self.name)
