@@ -84,8 +84,22 @@ class ObjectList(APIView):
 class RoomList(APIView):
 
     def get(self, request, format=None):
+
+	name = request.query_params.get('name', None)
+        type = request.query_params.get('type', None)
+        id = request.query_params.get('id', None)
+
         rooms = Room.objects.all()
+
+        if name is not None:
+            rooms = rooms.filter(name__icontains=str(name))
+        if type is not None:
+            rooms = rooms.filter(type__icontains=str(type))
+        if id is not None:
+            rooms = rooms.filter(id__exact=id)
+
         serializer = RoomSerializer(rooms, many=True)
+
         return Response(serializer.data)
 
     def post(self, request, format=None):
