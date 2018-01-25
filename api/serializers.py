@@ -6,46 +6,36 @@ from .models import Entity, Human, Object, Room, Waypoint, ArTag
 class EntitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Entity
-        fields = ('name', 'time', 'x_position', 'y_position', 'z_position')
+        fields = ('id','name', 'time', 'x_position', 'y_position', 'z_position')
 
 
 class HumanSerializer(serializers.ModelSerializer):
-    entity = EntitySerializer(read_only=True)
-
     class Meta:
         model = Human
-        fields = ('entity', 'gender', 'person_name')
+        fields = ('id','name', 'gender', 'x_position', 'y_position', 'z_position')
 
 
 class ObjectSerializer(serializers.ModelSerializer):
-    entity = EntitySerializer(read_only=True)
-
     class Meta:
         model = Object
-        fields = ('entity', 'type', 'color')
+        fields = ('id', 'name', 'type', 'color', 'room',  'x_position', 'y_position', 'z_position', 'theta')
 
 
 class RoomSerializer(serializers.ModelSerializer):
-    entity = EntitySerializer(read_only=True)
-
     class Meta:
         model = Room
         fields = (
-            'entity''x1', 'x2', 'x3', 'x4', 'y1', 'y2', 'y3', 'y4', 'room_name'
+            'id', 'name', 'type',  'x_position', 'y_position', 'z_position'
         )
 
 
 class WaypointSerializer(serializers.ModelSerializer):
-    entity = EntitySerializer(read_only=True)
-
     class Meta:
         model = Waypoint
-        fields = ('entity', 'x_position', 'y_position')
+        fields = ('id', 'name', 'x_position', 'y_position')
 
 
 class ArTagSerializer(serializers.ModelSerializer):
-    entity = EntitySerializer(read_only=True)
-
     class Meta:
         model = ArTag
-        fields = ('entity', 'ar_id')
+        fields = ('id', 'name', 'ar_id',  'x_position', 'y_position', 'z_position', 'theta')

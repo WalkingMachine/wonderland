@@ -51,7 +51,25 @@ class ObjectList(APIView):
     ''' List all Object. '''
 
     def get(self, request, format=None):
+        name = request.query_params.get('name', None)
+        color = request.query_params.get('color', None)
+        room = request.query_params.get('room', None)
+        type = request.query_params.get('type', None)
+        id = request.query_params.get('id', None)
+
         objects = Object.objects.all()
+        if name is not None:
+            objects = objects.filter(name__icontains=str(name))
+        if color is not None:
+            objects = objects.filter(color__icontains=str(color))
+        if room is not None:
+            objects = objects.filter(room__name__icontains=str(room))
+        if type is not None:
+            objects = objects.filter(type__icontains=str(type))
+        if id is not None:
+            objects = objects.filter(id__exact=id)
+
+        #objects = Object.objects.all()
         serializer = ObjectSerializer(objects, many=True)
         return Response(serializer.data)
 
@@ -66,9 +84,23 @@ class ObjectList(APIView):
 class RoomList(APIView):
 
     def get(self, request, format=None):
+
+	name = request.query_params.get('name', None)
+        type = request.query_params.get('type', None)
+        id = request.query_params.get('id', None)
+
         rooms = Room.objects.all()
+
+        if name is not None:
+            rooms = rooms.filter(name__icontains=str(name))
+        if type is not None:
+            rooms = rooms.filter(type__icontains=str(type))
+        if id is not None:
+            rooms = rooms.filter(id__exact=id)
+
         serializer = RoomSerializer(rooms, many=True)
-        return Reponse(serializer.data)
+
+        return Response(serializer.data)
 
     def post(self, request, format=None):
         serializer = RoomSerializer(data=request.data)
@@ -83,13 +115,13 @@ class WaypointList(APIView):
     def get(self, request, format=None):
         waypoints = Waypoint.objects.all()
         serializer = WaypointSerializer(waypoints, many=True)
-        return Reponse(serializer.data)
+        return Response(serializer.data)
 
     def post(self, request, format=None):
         serializer = WaypointSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Reponse(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
