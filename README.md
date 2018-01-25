@@ -1,4 +1,4 @@
-# wonderland
+# wonderland [![Build Status](https://travis-ci.org/WalkingMachine/wonderland.svg?branch=devel)](https://travis-ci.org/WalkingMachine/wonderland)
 API for One World Model
 
 ## Description
