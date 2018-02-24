@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<style>
+			#footer {
+				position:fixed;
+				bottom:0;
+				left:0;
+				right:0;
+				width:100%;
+				height:100px;
+			}
+			.button {
+				background-color: #0173af77;
+				border: none;
+				color: white;
+				padding: 15px 32px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				margin: 4px 2px;
+				cursor: pointer;
+			}
+			.parent {
+			  position: relative;
+			  top: 0;
+			  left: 0;
+			}
+			.image2 {
+			  position: absolute;
+			  top: 30px;
+			  left: 70px;
+			}
+		</style>
+        <meta charset="utf-8">
+        <title>Wonderland</title>
+
+			<script>
+				function myFunction() {
+					var x = document.getElementById("myDIV");
+	
+					if (x.style.display === "none") {
+						x.style.display = "block";
+					} else {
+						x.style.display = "none";
+					}
+				}
+				function point_it(event){
+					pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
+					pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+					
+
+					var d = document.getElementById('crossImg');
+					d.style.left = pos_x-25+'px';
+					d.style.top = pos_y-25+'px';
+
+					//alert(pos_x + ", " + pos_y);
+				}
+				function point_it2(event){
+					pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
+					pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+					
+
+					var d = document.getElementById('crossImg2');
+					d.style.left = pos_x-25+'px';
+					d.style.top = pos_y-25+'px';
+					return false;
+					//alert(pos_x + ", " + pos_y);
+				}
+
+
+				function getPos()
+				{
+					var ctl = document.getElementById('testimg');
+					var startPos = ctl.selectionStart;
+					var endPos = ctl.selectionEnd;
+					alert(startPos + ", " + endPos);
+				}
+			</script>
+
+
+    </head>
+	{% load static %}
+    <body id="bg" style="background-image: url('{% static "images/mountain.png"%}')";>
+		<div>
+			<img src='{% static "images/wonderland_logo_nobg.png"%}' width="600px">
+		</div>
+<hr>
+		<div>
+			<button class="button" onclick="window.location.href='/admin'">Admin</button><br>	
+			<button class="button" onclick="myFunction()">Afficher la carte</button>	
+			<div class="parent" id="myDIV">  
+					<img id="pointer_div" src="{% static "images/block_E.png"%}" oncontextmenu="point_it2(event)" onclick="point_it(event)" width=70%>
+					<img id="crossImg" class="image2" src="{% static "images/cross.png"%}" width="50"/>
+					<!--<img id="crossImg2" class="image2" src="{% static "images/cross_g.png"%}" width="50"/>-->
+			</div>	
+		</div>
+
+
+
+
+
+    </body>
+	<div id="footer">
+		<img src='{% static "images/wm_logo.png"%}' width="200px">
+	</div>
+</html>

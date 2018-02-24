@@ -21,9 +21,10 @@ from api import views
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    url(r'^/', include(router.urls)),
     url(r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('api.urls')),
-    url(r'^admin/', admin.site.urls)
+    url(r'^admin/', admin.site.urls),
+    url(r'^', include('home.urls'))
+
 ]

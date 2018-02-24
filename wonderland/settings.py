@@ -16,6 +16,15 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+STATICFILES_DIRS = (os.path.join( os.path.dirname( __file__ ), 'static' ),)
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.FileSystemFinder',
+'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
+
+STATIC_URL = '/static/'
+STATIC_ROOT = '' 
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -25,7 +34,7 @@ SECRET_KEY = '3+!+41ydkfy)n$y*!s=3*!v(6ks0&oa3924w9pmpv5cml$c-9x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wonderland']
+ALLOWED_HOSTS = ['wonderland', '*']
 
 
 # Application definition
@@ -39,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'home',
     'rest_framework_api_key',
     'corsheaders'
 ]
