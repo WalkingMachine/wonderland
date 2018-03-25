@@ -1,75 +1,43 @@
 from django.db import models
-from datetime import date
-
+from django.utils import timezone
 
 class Entity(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, default='')
-    time = models.DateTimeField(null=True)
-    x_position = models.FloatField(null=True)
-    y_position = models.FloatField(null=True)
-    z_position = models.FloatField(null=True)
+    name = models.CharField(max_length=100, default='')
 
-    def __str__(self):
-        return "{}".format(self.name)
+    # Id for data collector linking
+    trackingId = models.IntegerField(null=True, blank=True)
 
+    # Type of entity (waypoint, object, )
+    type = models.CharField(max_length=30)
 
-class Human(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, default='')
-    gender = models.CharField(max_length=1, null=True)
-    x_position = models.FloatField(null=True)
-    y_position = models.FloatField(null=True)
-    z_position = models.FloatField(null=True)
+    # Detected type by Yolo if it is an object.
+    subType = models.CharField(max_length=60, null=True, blank=True)
 
-    def __str__(self):
-        return "{}".format(self.name)
+    # Last time we saw the
+    time = models.DateTimeField(default=timezone.now(), blank=True)
 
-class Room(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, default='')
-    type = models.CharField(max_length=20, null=True)
+    # The entity is mobile or not
+    mobile = models.BooleanField(default=True, blank=True)
 
+    # Position of the entity in space
     x_position = models.FloatField()
     y_position = models.FloatField()
-    z_position = models.FloatField(null=True)
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class Object(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, default='')
-    type = models.CharField(max_length=50, null=True, blank=True)
-    color = models.CharField(max_length=20, null=True, blank=True)
-    room = models.ForeignKey(Room, models.SET_NULL, null=True, blank=True)
-
-    x_position = models.FloatField(null=True, blank=True)
-    y_position = models.FloatField(null=True, blank=True)
     z_position = models.FloatField(null=True, blank=True)
-    theta = models.FloatField(null=True, blank=True)
 
-    def __str__(self):
-        return "{}".format(self.name)
+    # Euler angles of the entity
+    yaw = models.FloatField(null=True, blank=True)
+    pitch = models.FloatField(null=True, blank=True)
+    roll = models.FloatField(null=True, blank=True)
 
-class Waypoint(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, default='')
-    x_position = models.FloatField()
-    y_position = models.FloatField()
+    # Colors of the entity
+    color = models.CharField(max_length=30, null=True, blank=True)
+    secondColor = models.CharField(max_length=30, null=True, blank=True)
+    thirdColor = models.CharField(max_length=30, null=True, blank=True)
+    fourthColor = models.CharField(max_length=30, null=True, blank=True)
 
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class ArTag(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, default='')
-    ar_id = models.IntegerField(null=True)
-    x_position = models.FloatField(null=True)
-    y_position = models.FloatField(null=True)
-    z_position = models.FloatField(null=True)
-    theta = models.FloatField(null=True)
+    # Gender of the entity (if it is a person)
+    gender = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
         return "{}".format(self.name)
