@@ -4,10 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+
 class EntityList(APIView):
 
-    ''' List all Entity or create a new entity. '''
-
+    # List all Entity or create a new entity.
     def get(self, request, format=None):
         entities = Entity.objects.all()
         serializer = EntitySerializer(entities, many=True)

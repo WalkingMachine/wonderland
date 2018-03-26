@@ -1,6 +1,7 @@
 from django.db import models
 from unixtimestampfield.fields import UnixTimeStampField
 
+
 class Entity(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, default='')
