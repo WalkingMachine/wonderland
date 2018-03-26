@@ -24,6 +24,7 @@ Thing you need to install
 - pyparsing==2.2.0
 - requests==2.13.0
 - six==1.10.0
+- django-unixtimestampfield==0.3.9
 
 ## Installation
 1. First you have to install every python requirement
