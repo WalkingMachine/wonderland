@@ -1,21 +1,22 @@
 from django.db import models
-from django.utils import timezone
+from unixtimestampfield.fields import UnixTimeStampField
 
 class Entity(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, default='')
 
-    # Id for data collector linking
-    trackingId = models.IntegerField(null=True, blank=True)
-
     # Type of entity (waypoint, object, )
     type = models.CharField(max_length=30)
+
+    # Id for data collector linking
+    trackingId = models.IntegerField(null=True, blank=True)
 
     # Detected type by Yolo if it is an object.
     subType = models.CharField(max_length=60, null=True, blank=True)
 
     # Last time we saw the
-    time = models.DateTimeField(default=timezone.now(), blank=True)
+    created = UnixTimeStampField(auto_now_add=True, use_numeric=True)
+    modified = UnixTimeStampField(auto_now=True, use_numeric=True)
 
     # The entity is mobile or not
     mobile = models.BooleanField(default=True, blank=True)
