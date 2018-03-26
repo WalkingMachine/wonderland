@@ -5,8 +5,8 @@ python:
 
 install:
   - pip install -r requirements.txt
-  - pip install pep8
+  - pip install pycodestyle
 
 script:
   - python manage.py test
-  - pep8 --count --show-source --exclude=migrations .
+  - pycodestyle --count --show-source --exclude=migrations .
