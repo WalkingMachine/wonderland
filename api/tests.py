@@ -9,5 +9,7 @@ class EntityTest(TestCase):
     def setUpTestData(cls):
         cls.entity = Entity.objects.create(
             name="entity_test",
-            time=None
-        )
+            type="bitch",
+            x_position=10.2,
+            y_position=1.12
+            )
