@@ -8,5 +8,7 @@ install:
   - pip install pycodestyle
 
 script:
+  - python manage.py makemigrations
+  - python manage.py migrate
   - python manage.py test
   - pycodestyle --count --show-source --exclude=migrations .
