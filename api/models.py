@@ -44,3 +44,24 @@ class Entity(models.Model):
 
     def __str__(self):
         return "{}".format(self.name)
+
+
+# Description of a space in the arena (like a room)
+class Space(models.Model):
+    space_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, default='unknown')
+
+    # Left
+    x_left = models.FloatField()
+
+    # Right
+    x_right = models.FloatField()
+
+    # Up
+    y_up = models.FloatField()
+
+    # Down
+    y_down = models.FloatField()
+
+    def __str__(self):
+        return "{}".format(self.name)
