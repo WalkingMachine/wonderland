@@ -49,7 +49,7 @@ class Entity(models.Model):
 # Description of a space in the arena (like a room)
 class Space(models.Model):
     space_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, default='unknown')
+    name = models.CharField(max_length=100)
 
     # Left
     x_left = models.FloatField()
