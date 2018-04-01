@@ -59,28 +59,37 @@ Add an object in the list.
 
 **Body:**
 
-|    key    |         description         | needed |
-|:---------:|:---------------------------:|:------:|
-|  `name`   |  The name of the space      |    &#10003;    |
-| `x_left`  |  The left delimiter         |    &#10003;    |
-| `x_right` |  The right delimiter        |    &#10003;    |
-|  `y_top`  |  The top delimiter          |    &#10003;    |
-| `y_bottom`|  The bottom delimiter       |    &#10003;    |
+|    key    |         description         | optional |
+|:---------:|:---------------------------:|:--------:|
+|  `name`   |  The name of the space      |          |
+| `x_left`  |  The left delimiter         |          |
+| `x_right` |  The right delimiter        |          |
+|  `y_top`  |  The top delimiter          |          |
+| `y_bottom`|  The bottom delimiter       |          |
 
 **Response:**
 
-|   key    |         description         | needed |
-|:--------:|:---------------------------:|:------:|
-|`space_id`|  The id of the space        |    &#10003;    |
-|  `name`  |  The name of the space      |    &#10003;    |
-| `x_left` |  The left delimiter         |    &#10003;    |
-|`x_right` |  The right delimiter        |    &#10003;    |
-| `y_top`  |  The top delimiter          |    &#10003;    |
-|`y_bottom`|  The bottom delimiter       |    &#10003;    |
+|   key    |         description         |
+|:--------:|:---------------------------:|
+|`space_id`|  The id of the space        |
+|  `name`  |  The name of the space      |
+| `x_left` |  The left delimiter         |
+|`x_right` |  The right delimiter        |
+| `y_top`  |  The top delimiter          |
+|`y_bottom`|  The bottom delimiter       |
 
 #### GET
 
-Get the
+Get the room designed by the entered id or name. The priority is on the id.
+
+> TODO: Add search by geolocation
+
+**Body:**
+
+|    key   |         description         | optional |
+|:--------:|:---------------------------:|:--------:|
+|`space_id`|  The name of the space      | &#10003; |
+|  `name`  |  The name of the space      | &#10003; |
 
 ## Usage
 ### PostMan
