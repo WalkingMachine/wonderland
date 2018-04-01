@@ -49,7 +49,9 @@ python manage.py runserver
 
 > TODO
 
-### For Spaces
+### Spaces
+
+Save all rooms and spaces in the arena.
 
 #### POST
 
