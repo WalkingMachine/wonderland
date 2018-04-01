@@ -43,22 +43,40 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-## Usage
+## Features
 
+### For Entities
+
+> TODO
+
+### For Spaces
+
+#### POST
+
+Add an object in the list.
+
+**Body:**
+
+|    key    |         description         | needed |
+|:---------:|:---------------------------:|:------:|
+|  `name`   |  The name of the space      |    &#10003;    |
+| `x_right` |  The right delimiter        |    &#10003;    |
+| `x_left`  |  The left delimiter         |    &#10003;    |
+|  `y_top`  |  The top delimiter          |    &#10003;    |
+| `y_bottom`|  The bottom delimiter       |    &#10003;    |
+
+
+
+#### GET
+
+Get the
+
+## Usage
 ### PostMan
 *Recommendation*
 1. Installation see [here](https://www.getpostman.com/)
 
 2. From Postman import `Walking Machine.postman_collection` located [here](../master/Walking%20Machine.postman_collection.json)
-
-### CURL
-*TODO*
-
-## TODO
-- [ ] Make an Action list
-- [ ] Make an API list
-- [ ] Edit Model
-- [ ] Add test File
 
 ## LICENCE
 Apache License 2.0
