@@ -15,4 +15,4 @@ class EntitySerializer(serializers.ModelSerializer):
 class SpaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Space
-        fields = ('space_id', 'name', 'x_left', 'x_right', 'y_up', 'y_down')
+        fields = ('space_id', 'name', 'x_left', 'x_right', 'y_top', 'y_bottom')

@@ -58,10 +58,10 @@ class Space(models.Model):
     x_right = models.FloatField()
 
     # Up
-    y_up = models.FloatField()
+    y_top = models.FloatField()
 
     # Down
-    y_down = models.FloatField()
+    y_bottom = models.FloatField()
 
     def __str__(self):
         return "{}".format(self.name)
