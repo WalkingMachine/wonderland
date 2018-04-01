@@ -2,9 +2,10 @@ from django.db import models
 from unixtimestampfield.fields import UnixTimeStampField
 
 
+# Description of an object in the arena
 class Entity(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, default='')
+    entity_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, default='unknown')
 
     # Type of entity (waypoint, object, )
     type = models.CharField(max_length=30)
