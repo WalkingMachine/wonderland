@@ -67,7 +67,16 @@ Add an object in the list.
 |  `y_top`  |  The top delimiter          |    &#10003;    |
 | `y_bottom`|  The bottom delimiter       |    &#10003;    |
 
+**Response:**
 
+|   key    |         description         | needed |
+|:--------:|:---------------------------:|:------:|
+|`space_id`|  The id of the space        |    &#10003;    |
+|  `name`  |  The name of the space      |    &#10003;    |
+|`x_right` |  The right delimiter        |    &#10003;    |
+| `x_left` |  The left delimiter         |    &#10003;    |
+| `y_top`  |  The top delimiter          |    &#10003;    |
+|`y_bottom`|  The bottom delimiter       |    &#10003;    |
 
 #### GET
 
