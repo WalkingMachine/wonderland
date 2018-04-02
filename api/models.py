@@ -23,7 +23,7 @@ class Entity(models.Model):
     # The entity is mobile or not
     mobile = models.BooleanField(default=True, blank=True)
 
-    # Position of the entity in space
+    # Position of the entity in area
     x_position = models.FloatField()
     y_position = models.FloatField()
     z_position = models.FloatField(null=True, blank=True)
@@ -46,9 +46,9 @@ class Entity(models.Model):
         return "{}".format(self.name)
 
 
-# Description of a space in the arena (like a room)
-class Space(models.Model):
-    space_id = models.AutoField(primary_key=True)
+# Description of a area in the arena (like a room)
+class Area(models.Model):
+    area_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
 
     # Left

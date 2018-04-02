@@ -1,4 +1,4 @@
-from api.models import Entity, Space
+from api.models import Entity, Area
 from api.serializers import EntitySerializer, SpaceSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -24,17 +24,17 @@ class EntityList(APIView):
 class SpaceList(APIView):
     # List all Entity or create a new entity.
     def get(self, request, format=None):
-        objects = Space.objects.all()
+        objects = Area.objects.all()
 
         # Read parameters
-        space_id = request.query_params.get('space_id', None)
+        area_id = request.query_params.get('area_id', None)
         name = request.query_params.get('name', None)
         x_position = request.query_params.get('x_position', None)
         y_position = request.query_params.get('y_position', None)
 
-        if space_id is not None:
+        if area_id is not None:
             # If there is an ID parameter, return the corespondent rooms
-            objects = objects.filter(space_id__exact=space_id)
+            objects = objects.filter(area_id__exact=area_id)
 
         elif name is not None:
             # If there is a name parameter, return the corespondent rooms

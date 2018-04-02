@@ -3,5 +3,5 @@ from api import views
 
 urlpatterns = [
     url(r'^api/entity/$', views.EntityList.as_view()),
-    url(r'^api/space/$', views.SpaceList.as_view())
+    url(r'^api/area/$', views.SpaceList.as_view())
 ]

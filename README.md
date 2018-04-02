@@ -98,7 +98,7 @@ Save all areas in the arena.
 
 |    key    |         description         | optional |
 |:---------:|:---------------------------:|:--------:|
-|  `name`   |  The name of the space      |          |
+|  `name`   |  The name of the area      |          |
 | `x_left`  |  The left delimiter         |          |
 | `x_right` |  The right delimiter        |          |
 |  `y_top`  |  The top delimiter          |          |
@@ -108,8 +108,8 @@ Save all areas in the arena.
 
 |   key    |         description         |
 |:--------:|:---------------------------:|
-|`space_id`|  The id of the space        |
-|  `name`  |  The name of the space      |
+|`area_id`|  The id of the area        |
+|  `name`  |  The name of the area      |
 | `x_left` |  The left delimiter         |
 |`x_right` |  The right delimiter        |
 | `y_top`  |  The top delimiter          |
@@ -127,7 +127,7 @@ Save all areas in the arena.
 
 |   key    |         description         |
 |:--------:|:---------------------------:|
-|`space_id`|  The id of the area         |
+|`area_id`|  The id of the area         |
 |  `name`  |  The name of the area       |
 | `x_left` |  The left delimiter         |
 |`x_right` |  The right delimiter        |
@@ -142,15 +142,15 @@ Save all areas in the arena.
 
 |    key   |         description         | optional |
 |:--------:|:---------------------------:|:--------:|
-|`space_id`|  The id of the area         | &#10003; |
+|`area_id`|  The id of the area         | &#10003; |
 |  `name`  |  The name of the area       | &#10003; |
 
 **Response content if success:** A list of areas corresponding to the request, with the following form:
 
 |   key    |         description         |
 |:--------:|:---------------------------:|
-|`space_id`|  The id of the space        |
-|  `name`  |  The name of the space      |
+|`area_id`|  The id of the area        |
+|  `name`  |  The name of the area      |
 | `x_left` |  The left delimiter         |
 |`x_right` |  The right delimiter        |
 | `y_top`  |  The top delimiter          |
@@ -171,8 +171,8 @@ Save all areas in the arena.
 
 |   key    |         description         |
 |:--------:|:---------------------------:|
-|`space_id`|  The id of the space        |
-|  `name`  |  The name of the space      |
+|`area_id`|  The id of the area        |
+|  `name`  |  The name of the area      |
 | `x_left` |  The left delimiter         |
 |`x_right` |  The right delimiter        |
 | `y_top`  |  The top delimiter          |
