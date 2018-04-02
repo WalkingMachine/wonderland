@@ -32,8 +32,6 @@ class SpaceList(APIView):
         x_position = request.query_params.get('x_position', None)
         y_position = request.query_params.get('y_position', None)
 
-        print (format)
-
         if space_id is not None:
             # If there is an ID parameter, return the corespondent rooms
             objects = objects.filter(space_id__exact=space_id)
