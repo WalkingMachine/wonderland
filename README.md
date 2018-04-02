@@ -72,7 +72,7 @@ python manage.py createsuperuser
 5. Migration
 ```bash
 python manage.py makemigrations
-python manage.py migrate
+python manage.py migrate --run-syncdb 
 ```
 
 6. Run server
