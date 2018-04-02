@@ -49,13 +49,33 @@ Thing you need to install
 pip install -r requirements.txt
 ```
 
-2. Migration
+2. Reset database
+```bash
+python manage.py flush
+```
+
+3. Create a new superuser
+```bash
+python manage.py createsuperuser
+```
+
+4. Generate a new API key
+
++ Go to the api administration page (usually [localhost:8000/admin/](http://localhost:8000/admin/rest_framework_api_key/apikey/))
+
++ Create a new api-key
+
++ Save this api-key for use in the application or for test.
+
+> The api-key will be given by a message like this: `The API Key for tests is 0801911fea20713b7416e88164a357eac6de3f3a. Please note it since you will not be able to see it again.`
+
+5. Migration
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-3. Run server
+6. Run server
 ```bash
 python manage.py runserver
 ```
