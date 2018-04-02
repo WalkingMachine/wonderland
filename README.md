@@ -4,6 +4,23 @@ API for One World Model
 # Description
 This API will help [S.A.R.A](http://walkingmachine.ca) to list all object she can see in her environment.
 
+# Table of contents
+
+- [Requirements](#requirements)
+  * [Base](#base)
+  * [Requirements](#requirements-1)
+- [Installation](#installation)
+- [Uses](#uses)
+  * [For Entities](#for-entities)
+  * [For area](#for-area)
+    + [Add an area in the list](#add-an-area-in-the-list)
+    + [Get all areas](#get-all-areas)
+    + [Get specified area](#get-specified-area)
+    + [Get an area corresponding to a position in the arena](#get-an-area-corresponding-to-a-position-in-the-arena)
+- [HELP](#help)
+  * [PostMan](#postman)
+- [LICENCE](#licence)
+
 # Requirements
 Thing you need to install
 ## Base
