@@ -65,3 +65,20 @@ class Area(models.Model):
 
     def __str__(self):
         return "{}".format(self.name)
+
+
+class Waypoint(models.Model):
+    waypoint_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+
+    # Position of the waypoint
+    x_position = models.FloatField()
+    y_position = models.FloatField()
+    yaw = models.FloatField(null=True, blank=True)
+
+    # Many to Many links
+    entities = models.ManyToManyField(Entity)
+    areas = models.ManyToManyField(Area)
+
+    def __str__(self):
+        return "{}".format(self.name)
