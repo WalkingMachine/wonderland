@@ -7,9 +7,13 @@ install:
   - pip install -r requirements.txt
   - pip install pycodestyle
 
-script:
+before_script:
   - python manage.py flush --noinput
   - python manage.py makemigrations --noinput
   - python manage.py migrate --run-syncdb --noinput
+
+script:
   - python manage.py test
+
+after_script:
   - pycodestyle --count --show-source --exclude=migrations .
