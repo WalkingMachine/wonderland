@@ -2,13 +2,15 @@
 
 # This script will install wonderland
 
-# install pip3 and python3 developpement header
-sudo apt-get install python3 python3-pip python3-dev
+# Install pip and python developpement header
+sudo apt install python python-pip python-dev
 
-git clone  https://github.com/WalkingMachine/wonderland.git
+# Install requirements
+pip install -r requirements.txt
 
-cd wonderland
-
-pip3 install -r requirements.txt
+# Prepare application
+python manage.py flush --noinput
+python manage.py makemigrations --noinput
+python manage.py migrate --run-syncdb --noinput
 
 echo "Install done"
