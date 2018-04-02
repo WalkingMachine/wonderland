@@ -1,12 +1,19 @@
 language: python
 
 python:
-  - 3.5
+  - 2.7
 
 install:
-  - pip3 install -r requirements.txt
-  - pip3 install pep8
+  - pip install -r requirements.txt
+  - pip install pycodestyle
+
+before_script:
+  - python manage.py flush --noinput
+  - python manage.py makemigrations --noinput
+  - python manage.py migrate --run-syncdb --noinput
 
 script:
-  - python3 manage.py test
-  - pep8 --count --show-source --exclude=migrations .
+  - python manage.py test
+
+after_script:
+  - pycodestyle --count --show-source --exclude=migrations .

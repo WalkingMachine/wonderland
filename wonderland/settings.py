@@ -25,7 +25,7 @@ SECRET_KEY = '3+!+41ydkfy)n$y*!s=3*!v(6ks0&oa3924w9pmpv5cml$c-9x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wonderland']
+ALLOWED_HOSTS = ['wonderland', 'localhost']
 
 
 # Application definition
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework_api_key.permissions.HasAPIAccess',
+        #TODO: Reset this -> 'rest_framework_api_key.permissions.HasAPIAccess',
     ],
     'PAGE_SIZE': 10
 }
@@ -89,6 +89,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'TEST_NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

@@ -1,75 +1,67 @@
 from django.db import models
-from datetime import date
+from unixtimestampfield.fields import UnixTimeStampField
 
 
+# Description of an object in the arena
 class Entity(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, default='')
-    time = models.DateTimeField(null=True)
-    x_position = models.FloatField(null=True)
-    y_position = models.FloatField(null=True)
-    z_position = models.FloatField(null=True)
+    entity_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, default='unknown')
 
-    def __str__(self):
-        return "{}".format(self.name)
+    # Type of entity (waypoint, object, )
+    type = models.CharField(max_length=30)
 
+    # Id for data collector linking
+    trackingId = models.IntegerField(null=True, blank=True)
 
-class Human(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, default='')
-    gender = models.CharField(max_length=1, null=True)
-    x_position = models.FloatField(null=True)
-    y_position = models.FloatField(null=True)
-    z_position = models.FloatField(null=True)
+    # Detected type by Yolo if it is an object.
+    subType = models.CharField(max_length=60, null=True, blank=True)
 
-    def __str__(self):
-        return "{}".format(self.name)
+    # Last time we saw the
+    created = UnixTimeStampField(auto_now_add=True, use_numeric=True)
+    modified = UnixTimeStampField(auto_now=True, use_numeric=True)
 
-class Room(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, default='')
-    type = models.CharField(max_length=20, null=True)
+    # The entity is mobile or not
+    mobile = models.BooleanField(default=True, blank=True)
 
+    # Position of the entity in area
     x_position = models.FloatField()
     y_position = models.FloatField()
-    z_position = models.FloatField(null=True)
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class Object(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, default='')
-    type = models.CharField(max_length=50, null=True, blank=True)
-    color = models.CharField(max_length=20, null=True, blank=True)
-    room = models.ForeignKey(Room, models.SET_NULL, null=True, blank=True)
-
-    x_position = models.FloatField(null=True, blank=True)
-    y_position = models.FloatField(null=True, blank=True)
     z_position = models.FloatField(null=True, blank=True)
-    theta = models.FloatField(null=True, blank=True)
+
+    # Euler angles of the entity
+    yaw = models.FloatField(null=True, blank=True)
+    pitch = models.FloatField(null=True, blank=True)
+    roll = models.FloatField(null=True, blank=True)
+
+    # Colors of the entity
+    color = models.CharField(max_length=30, null=True, blank=True)
+    secondColor = models.CharField(max_length=30, null=True, blank=True)
+    thirdColor = models.CharField(max_length=30, null=True, blank=True)
+    fourthColor = models.CharField(max_length=30, null=True, blank=True)
+
+    # Gender of the entity (if it is a person)
+    gender = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
         return "{}".format(self.name)
 
-class Waypoint(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, default='')
-    x_position = models.FloatField()
-    y_position = models.FloatField()
 
-    def __str__(self):
-        return "{}".format(self.name)
+# Description of a area in the arena (like a room)
+class Area(models.Model):
+    area_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
 
+    # Left
+    x_left = models.FloatField()
 
-class ArTag(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, default='')
-    ar_id = models.IntegerField(null=True)
-    x_position = models.FloatField(null=True)
-    y_position = models.FloatField(null=True)
-    z_position = models.FloatField(null=True)
-    theta = models.FloatField(null=True)
+    # Right
+    x_right = models.FloatField()
+
+    # Up
+    y_top = models.FloatField()
+
+    # Down
+    y_bottom = models.FloatField()
 
     def __str__(self):
         return "{}".format(self.name)

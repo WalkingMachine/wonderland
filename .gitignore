@@ -102,3 +102,9 @@ ENV/
 
 # idea
 /.idea
+
+# db file
+/db.sqlite3
+
+# migration files
+/migrations/*
