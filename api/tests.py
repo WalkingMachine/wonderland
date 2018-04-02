@@ -37,3 +37,27 @@ class AreaTest(TestCase):
         area = json.loads(response.content)[0]
         self.assertEqual(response.status_code, 200)
         self.assertEqual(area['name'], 'living')
+
+    def test_post_view(self):
+        response = self.client.post('/api/area/', {'name': 'garage',
+                                                   'x_right': -30,
+                                                   'x_left': -50,
+                                                   'y_top': -20,
+                                                   'y_bottom': 20
+                                                   })
+        area = json.loads(response.content)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(area['name'], 'garage')
+        self.assertEqual(area['x_right'], -30)
+        self.assertEqual(area['x_left'], -50)
+        self.assertEqual(area['y_top'], -20)
+        self.assertEqual(area['y_bottom'], 20)
+
+        response = self.client.get('/api/area/', {'area_id': area['area_id']})
+        area = json.loads(response.content)[0]
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(area['x_right'], -30)
+        self.assertEqual(area['x_left'], -50)
+        self.assertEqual(area['y_top'], -20)
+        self.assertEqual(area['y_bottom'], 20)
