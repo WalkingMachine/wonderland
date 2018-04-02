@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework_api_key.permissions.HasAPIAccess',
+        #TODO: Reset this -> 'rest_framework_api_key.permissions.HasAPIAccess',
     ],
     'PAGE_SIZE': 10
 }
