@@ -1,18 +1,18 @@
 # wonderland [![Build Status](https://travis-ci.org/WalkingMachine/wonderland.svg?branch=master)](https://travis-ci.org/WalkingMachine/wonderland)
 API for One World Model
 
-## Description
+# Description
 This API will help [S.A.R.A](http://walkingmachine.ca) to list all object she can see in her environment.
 
-## Requirements
+# Requirements
 Thing you need to install
-### Base
+## Base
 - [Python](https://www.python.org/) 3.5
 - [Django](https://www.djangoproject.com/) 1.11.2
 - [Django rest_framework](http://www.django-rest-framework.org/)
 - [Pip](https://pypi.python.org/pypi/pip?) for python 3.5
 
-### Requirements
+## Requirements
 - appdirs==1.4.3
 - Django==1.11.2
 - django-cors-headers==2.1.0
@@ -26,7 +26,7 @@ Thing you need to install
 - six==1.10.0
 - django-unixtimestampfield==0.3.9
 
-## Installation
+# Installation
 1. First you have to install every python requirement
 ```bash
 pip install -r requirements.txt
@@ -43,21 +43,21 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-## Features
+# Uses
 
-### For Entities
+## For Entities
 
 > TODO
 
-### Spaces
+## For area
 
-Save all rooms and spaces in the arena.
+Save all areas in the arena.
 
-#### POST
+### Add an area in the list
 
-Add an object in the list.
+**Method:** POST
 
-**Body:**
+**Request content:**
 
 |    key    |         description         | optional |
 |:---------:|:---------------------------:|:--------:|
@@ -67,7 +67,7 @@ Add an object in the list.
 |  `y_top`  |  The top delimiter          |          |
 | `y_bottom`|  The bottom delimiter       |          |
 
-**Response:**
+**Response content if success:** A list of areas with the following form:
 
 |   key    |         description         |
 |:--------:|:---------------------------:|
@@ -78,25 +78,75 @@ Add an object in the list.
 | `y_top`  |  The top delimiter          |
 |`y_bottom`|  The bottom delimiter       |
 
-#### GET
+**Response if data missing:** A list of missing datas with code `400`.
 
-Get the room designed by the entered id or name. The priority is on the id.
+### Get all areas
 
-> TODO: Add search by geolocation
+**Method:** GET
 
-**Body:**
+**Request content:** Nothing
+
+**Response content if success:** A list of areas with the following form:
+
+|   key    |         description         |
+|:--------:|:---------------------------:|
+|`space_id`|  The id of the area         |
+|  `name`  |  The name of the area       |
+| `x_left` |  The left delimiter         |
+|`x_right` |  The right delimiter        |
+| `y_top`  |  The top delimiter          |
+|`y_bottom`|  The bottom delimiter       |
+
+### Get specified area
+
+**Method:** GET
+
+**Request content:** One of the following key (id is prefered as name if there is both):
 
 |    key   |         description         | optional |
 |:--------:|:---------------------------:|:--------:|
-|`space_id`|  The name of the space      | &#10003; |
-|  `name`  |  The name of the space      | &#10003; |
+|`space_id`|  The id of the area         | &#10003; |
+|  `name`  |  The name of the area       | &#10003; |
 
-## Usage
-### PostMan
+**Response content if success:** A list of areas corresponding to the request, with the following form:
+
+|   key    |         description         |
+|:--------:|:---------------------------:|
+|`space_id`|  The id of the space        |
+|  `name`  |  The name of the space      |
+| `x_left` |  The left delimiter         |
+|`x_right` |  The right delimiter        |
+| `y_top`  |  The top delimiter          |
+|`y_bottom`|  The bottom delimiter       |
+
+### Get an area corresponding to a position in the arena
+
+**Method:** GET
+
+**Request content:** The position in the arena of an object, with the following form:
+
+|     key    |         description         | optional |
+|:----------:|:---------------------------:|:--------:|
+|`x_position`|  x position of the point    |          |
+|`y_position`|  y position of the point    |          |
+
+**Response content if success:** A list of areas corresponding to the request, with the following form:
+
+|   key    |         description         |
+|:--------:|:---------------------------:|
+|`space_id`|  The id of the space        |
+|  `name`  |  The name of the space      |
+| `x_left` |  The left delimiter         |
+|`x_right` |  The right delimiter        |
+| `y_top`  |  The top delimiter          |
+|`y_bottom`|  The bottom delimiter       |
+
+# HELP
+## PostMan
 *Recommendation*
 1. Installation see [here](https://www.getpostman.com/)
 
 2. From Postman import `Walking Machine.postman_collection` located [here](../master/Walking%20Machine.postman_collection.json)
 
-## LICENCE
+# LICENCE
 Apache License 2.0
