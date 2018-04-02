@@ -9,7 +9,7 @@ install:
 
 script:
   - python manage.py flush --noinput
-  - python manage.py makemigrations
-  - python manage.py migrate --noinput
+  - python manage.py makemigrations --noinput
+  - python manage.py migrate --run-syncdb --noinput
   - python manage.py test
   - pycodestyle --count --show-source --exclude=migrations .
