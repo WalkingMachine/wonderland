@@ -1,5 +1,5 @@
 from api.models import Entity, Area
-from api.serializers import EntitySerializer, SpaceSerializer
+from api.serializers import EntitySerializer, AreaSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -21,7 +21,7 @@ class EntityList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SpaceList(APIView):
+class AreaList(APIView):
     # List all Entity or create a new entity.
     def get(self, request, format=None):
         objects = Area.objects.all()
@@ -47,13 +47,13 @@ class SpaceList(APIView):
                                      y_top__gte=y_position,
                                      y_bottom__lte=y_position)
 
-        serializer = SpaceSerializer(objects, many=True)
+        serializer = AreaSerializer(objects, many=True)
 
         return Response(serializer.data)
 
     # Add a room in the arena
     def post(self, request, format=None):
-        serializer = SpaceSerializer(data=request.data)
+        serializer = AreaSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save()

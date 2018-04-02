@@ -12,7 +12,7 @@ class EntitySerializer(serializers.ModelSerializer):
                   'gender')
 
 
-class SpaceSerializer(serializers.ModelSerializer):
+class AreaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Area
         fields = ('area_id', 'name', 'x_left', 'x_right', 'y_top', 'y_bottom')
