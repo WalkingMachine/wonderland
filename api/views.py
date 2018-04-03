@@ -1,5 +1,5 @@
-from api.models import Entity, Area
-from api.serializers import EntitySerializer, AreaSerializer
+from api.models import Entity, Area, Waypoint
+from api.serializers import EntitySerializer, AreaSerializer, WaypointSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -48,6 +48,26 @@ class AreaList(APIView):
                                      y_bottom__lte=y_position)
 
         serializer = AreaSerializer(objects, many=True)
+
+        return Response(serializer.data)
+
+    # Add a room in the arena
+    def post(self, request, format=None):
+        serializer = AreaSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class WaypointList(APIView):
+    # List all Entity or create a new entity.
+    def get(self, request, format=None):
+        objects = Waypoint.objects.all()
+
+        serializer = WaypointSerializer(objects, many=True)
 
         return Response(serializer.data)
 
