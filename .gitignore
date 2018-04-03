@@ -107,4 +107,4 @@ ENV/
 /db.sqlite3
 
 # migration files
-/migrations/*
+/api/migrations/*
