@@ -59,14 +59,19 @@ class AreaList(APIView):
         if not data._mutable:
             data._mutable = True
 
-        if request.data['x_left'] > request.data['x_right']:
+        data['x_left'] = float(data['x_left'])
+        data['x_right'] = float(data['x_right'])
+        data['y_bottom'] = float(data['y_bottom'])
+        data['y_top'] = float(data['y_top'])
+
+        if data['x_left'] > data['x_right']:
             buffer = data['x_left']
-            data['x_left'] = request.data['x_right']
+            data['x_left'] = data['x_right']
             data['x_right'] = buffer
 
-        if request.data['y_bottom'] > request.data['y_top']:
+        if data['y_bottom'] > data['y_top']:
             buffer = data['y_bottom']
-            data['y_bottom'] = request.data['y_top']
+            data['y_bottom'] = data['y_top']
             data['y_top'] = buffer
 
         serializer = AreaSerializer(data=data)

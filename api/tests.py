@@ -50,8 +50,8 @@ class AreaTest(TestCase):
         self.assertEqual(area['name'], 'garage')
         self.assertEqual(area['x_right'], -30)
         self.assertEqual(area['x_left'], -50)
-        self.assertEqual(area['y_top'], -20)
-        self.assertEqual(area['y_bottom'], 20)
+        self.assertEqual(area['y_top'], 20)
+        self.assertEqual(area['y_bottom'], -20)
 
         response = self.client.get('/api/area/', {'area_id': area['area_id']})
         area = json.loads(response.content)[0]
@@ -59,5 +59,5 @@ class AreaTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(area['x_right'], -30)
         self.assertEqual(area['x_left'], -50)
-        self.assertEqual(area['y_top'], -20)
-        self.assertEqual(area['y_bottom'], 20)
+        self.assertEqual(area['y_top'], 20)
+        self.assertEqual(area['y_bottom'], -20)
