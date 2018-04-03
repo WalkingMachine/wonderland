@@ -43,7 +43,7 @@ class Entity(models.Model):
     gender = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
-        return "{}".format(self.name)
+        return self.name
 
 
 # Description of a area in the arena (like a room)
@@ -64,7 +64,7 @@ class Area(models.Model):
     y_bottom = models.FloatField()
 
     def __str__(self):
-        return "{}".format(self.name)
+        return self.name
 
 
 class Waypoint(models.Model):
@@ -77,8 +77,8 @@ class Waypoint(models.Model):
     yaw = models.FloatField(null=True, blank=True)
 
     # Many to Many links
-    entities = models.ManyToManyField(Entity)
-    areas = models.ManyToManyField(Area)
+    entities = models.ManyToManyField(Entity, blank=True)
+    areas = models.ManyToManyField(Area, blank=True)
 
     def __str__(self):
-        return "{}".format(self.name)
+        return self.name
