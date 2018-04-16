@@ -3,7 +3,7 @@
 # This script will install wonderland
 
 # Install pip and python developpement header
-sudo apt install python python-pip python-dev
+sudo apt install python python-pip python-dev -y
 
 # Install requirements
 pip install -r requirements.txt
