@@ -84,99 +84,71 @@ python manage.py runserver
 
 ## For Entities
 
-> TODO
+Save all entities in the arena. Like rooms, objects, containers...
 
-## For area
-
-Save all areas in the arena.
-
-### Add an area in the list
+### Add an entity in the list
 
 **Method:** POST
 
+> TODO
+
+### Get all entities
+
+**URL:** `/api/entity`
+
+**Method:** `GET`
+
+**Request content:** `Nothing`
+
+**Response content if success:** A list of areas with the following form:
+
+|       key       |          description          |
+|:---------------:|:-----------------------------:|
+|    `entityId`   |  The id of the area           |
+|  `entityClass`  |  The yolo class of the entity |
+|  `entityName`   |  The name of the area         |
+
+### Get an entity specified by ID
+
+**URL:** `/api/entity`
+
+**Method:** `GET`
+
 **Request content:**
 
-|    key    |         description         | optional |
-|:---------:|:---------------------------:|:--------:|
-|  `name`   |  The name of the area      |          |
-| `x_left`  |  The left delimiter         |          |
-| `x_right` |  The right delimiter        |          |
-|  `y_top`  |  The top delimiter          |          |
-| `y_bottom`|  The bottom delimiter       |          |
-
-**Response content if success:** A list of areas with the following form:
-
-|   key    |         description         |
+|    key   |         description         |
 |:--------:|:---------------------------:|
-|`area_id`|  The id of the area        |
-|  `name`  |  The name of the area      |
-| `x_left` |  The left delimiter         |
-|`x_right` |  The right delimiter        |
-| `y_top`  |  The top delimiter          |
-|`y_bottom`|  The bottom delimiter       |
+|`entityId`|  The id of the entity       |
 
-**Response if data missing:** A list of missing datas with code `400`.
+**Response content if success:** The entity corresponding to the request, with the following form:
 
-### Get all areas
+|       key       |          description          |
+|:---------------:|:-----------------------------:|
+|    `entityId`   |  The id of the area           |
+|  `entityClass`  |  The yolo class of the entity |
+|  `entityName`   |  The name of the area         |
 
-**Method:** GET
+### Get an entity specified by position in area, in descriptive way
 
-**Request content:** Nothing
+**URL:** `/api/entity`
 
-**Response content if success:** A list of areas with the following form:
+**Method:** `GET`
 
-|   key    |         description         |
-|:--------:|:---------------------------:|
-|`area_id`|  The id of the area         |
-|  `name`  |  The name of the area       |
-| `x_left` |  The left delimiter         |
-|`x_right` |  The right delimiter        |
-| `y_top`  |  The top delimiter          |
-|`y_bottom`|  The bottom delimiter       |
+**Request content:** One or more of those parameters:
 
-### Get specified area
+|        key       |            description            | optional |
+|:----------------:|:---------------------------------:|:--------:|
+|   `entityClass`  |  The yolo class of the entity     | &#10003; |
+| `entityContainer`|  The yolo class of the container  | &#10003; |
+|   `entityRoom`   |  The name of the room             | &#10003; |
 
-**Method:** GET
+**Response content if success:** A list of entities corresponding to the request, with the following form:
 
-**Request content:** One of the following key (id is prefered as name if there is both):
-
-|    key   |         description         | optional |
-|:--------:|:---------------------------:|:--------:|
-|`area_id`|  The id of the area         | &#10003; |
-|  `name`  |  The name of the area       | &#10003; |
-
-**Response content if success:** A list of areas corresponding to the request, with the following form:
-
-|   key    |         description         |
-|:--------:|:---------------------------:|
-|`area_id`|  The id of the area        |
-|  `name`  |  The name of the area      |
-| `x_left` |  The left delimiter         |
-|`x_right` |  The right delimiter        |
-| `y_top`  |  The top delimiter          |
-|`y_bottom`|  The bottom delimiter       |
-
-### Get an area corresponding to a position in the arena
-
-**Method:** GET
-
-**Request content:** The position in the arena of an object, with the following form:
-
-|     key    |         description         | optional |
-|:----------:|:---------------------------:|:--------:|
-|`x_position`|  x position of the point    |          |
-|`y_position`|  y position of the point    |          |
-
-**Response content if success:** A list of areas corresponding to the request, with the following form:
-
-|   key    |         description         |
-|:--------:|:---------------------------:|
-|`area_id`|  The id of the area        |
-|  `name`  |  The name of the area      |
-| `x_left` |  The left delimiter         |
-|`x_right` |  The right delimiter        |
-| `y_top`  |  The top delimiter          |
-|`y_bottom`|  The bottom delimiter       |
+|       key       |          description          |
+|:---------------:|:-----------------------------:|
+|    `entityId`   |  The id of the area           |
+|  `entityClass`  |  The yolo class of the entity |
+|  `entityName`   |  The name of the area         |
 
 # HELP
 ## PostMan
