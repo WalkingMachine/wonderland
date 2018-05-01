@@ -1,6 +1,6 @@
 from __future__ import print_function
 from django.test import TestCase
-from .models import Entity
+from models import Entity
 
 import json
 

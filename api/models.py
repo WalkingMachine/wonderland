@@ -11,7 +11,20 @@ class Entity(models.Model):
     entityIsRoom = models.BooleanField(default=False, null=False, blank=True)
     entityIsWaypoint = models.BooleanField(default=False, null=False, blank=True)
     entityIsContainer = models.BooleanField(default=False, null=False, blank=True)
-    entityIsMobile = models.BooleanField(default=False, null=False, blank=True)
+    entityGotPosition = models.BooleanField(default=False, null=False, blank=True)
+
+    # The position of the object in space if available
+    entityPosX = models.FloatField(default=None, null=True, blank=True)
+    entityPosY = models.FloatField(default=None, null=True, blank=True)
+    entityPosZ = models.FloatField(default=None, null=True, blank=True)
+    entityPosYaw = models.FloatField(default=None, null=True, blank=True)
+    entityPosPitch = models.FloatField(default=None, null=True, blank=True)
+    entityPosRoll = models.FloatField(default=None, null=True, blank=True)
+
+    # The position to reach to be able to catch the object
+    entityWaypointX = models.FloatField(default=None, null=True, blank=True)
+    entityWaypointY = models.FloatField(default=None, null=True, blank=True)
+    entityWaypointYaw = models.FloatField(default=None, null=True, blank=True)
 
     entityContainer = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
 
