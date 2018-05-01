@@ -26,6 +26,10 @@ class Entity(models.Model):
     entityWaypointY = models.FloatField(default=None, null=True, blank=True)
     entityWaypointYaw = models.FloatField(default=None, null=True, blank=True)
 
+    # Just for serialiser
+    depth_waypoint = models.IntegerField(null=True, blank=True)
+    depth_position = models.IntegerField(null=True, blank=True)
+
     entityContainer = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):

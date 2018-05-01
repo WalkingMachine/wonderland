@@ -8,5 +8,6 @@ class EntitySerializer(serializers.ModelSerializer):
         fields = ('entityId', 'entityClass', 'entityName', 'entityContainer',
                   'entityIsRoom', 'entityIsWaypoint', 'entityIsContainer', 'entityGotPosition',
                   'entityPosX', 'entityPosY', 'entityPosZ', 'entityPosYaw', 'entityPosPitch', 'entityPosRoll',
-                  'entityWaypointX', 'entityWaypointY', 'entityWaypointYaw'
+                  'entityWaypointX', 'entityWaypointY', 'entityWaypointYaw',
+                  'depth_waypoint', 'depth_position'
                   )

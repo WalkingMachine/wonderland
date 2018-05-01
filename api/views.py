@@ -14,6 +14,7 @@ class EntityList(APIView):
         entity_container = request.query_params.get('entityContainer', None)
         entity_room = request.query_params.get('entityRoom', None)
         entity_id = request.query_params.get('entityId', None)
+        depth_limit = request.query_params.get('depthLimit', 3)
 
         if entity_id is not None:
             print "ID:" + entity_id
@@ -37,13 +38,45 @@ class EntityList(APIView):
             if entity_room is not None:
                 print "room"
                 objects = objects.filter(
-                    Q(Q(entityContainer__entityClass__iexact=str(entity_room)),
-                      Q(entityContainer__entityIsRoom__exact=True)) |
-                    Q(Q(entityContainer__entityContainer__entityClass__iexact=str(entity_room)),
-                      Q(entityContainer__entityContainer__entityIsRoom__exact=True)) |
-                    Q(Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_room)),
-                      Q(entityContainer__entityContainer__entityContainer__entityIsRoom__exact=True))
+                    Q(entityContainer__entityClass__iexact=str(entity_room)) |
+                    Q(entityContainer__entityContainer__entityClass__iexact=str(entity_room)) |
+                    Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_room))
                 )
+
+        # For all object after filter
+        for anObject in objects:
+            next_object = anObject
+            depth = 0
+            anObject.depth_waypoint = -1
+            anObject.depth_position = -1
+
+            # Find the first parent with a waypoint and the first parent with a geolocation.
+            while depth <= depth_limit and (anObject.depth_waypoint == -1 or anObject.depth_position == -1):
+
+                # Save the first and only the first waypoint location
+                if next_object.entityIsWaypoint and anObject.depth_waypoint == -1:
+                    anObject.depth_waypoint = depth
+                    anObject.entityWaypointX = next_object.entityWaypointX
+                    anObject.entityWaypointY = next_object.entityWaypointY
+                    anObject.entityWaypointYaw = next_object.entityWaypointYaw
+
+                # Save the first and only the first object location
+                if next_object.entityGotPosition and anObject.depth_position == -1:
+                    anObject.depth_position = depth
+                    anObject.entityPosX = next_object.entityPosX
+                    anObject.entityPosY = next_object.entityPosY
+                    anObject.entityPosZ = next_object.entityPosZ
+                    anObject.entityPosYaw = next_object.entityPosYaw
+                    anObject.entityPosPitch = next_object.entityPosPitch
+                    anObject.entityPosRoll = next_object.entityPosRoll
+
+                # If there is no more parent, stop the loop
+                if next_object.entityContainer is None or next_object.entityIsRoom:
+                    break
+
+                # For limit the loop in error case
+                next_object = next_object.entityContainer
+                depth += 1
 
         serializer = EntitySerializer(objects, many=True)
         return Response(serializer.data)
