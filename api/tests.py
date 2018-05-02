@@ -7,15 +7,19 @@ import json
 
 class EntityTest(TestCase):
     def setUp(self):
-        e1 = Entity.objects.create(entityClass="dining room", entityContainer=None, entityIsRoom=True)  # 1
-        e2 = Entity.objects.create(entityClass="bedroom", entityContainer=None, entityIsRoom=True)      # 2
+        e1 = Entity.objects.create(entityClass="dining room", entityContainer=None, entityIsRoom=True,
+                                   entityIsWaypoint=True, entityWaypointX=0, entityWaypointY=5)         # 1
+        e2 = Entity.objects.create(entityClass="bedroom", entityContainer=None, entityIsRoom=True,
+                                   entityIsWaypoint=True, entityWaypointX=12, entityWaypointY=15)       # 2
         e3 = Entity.objects.create(entityClass="table", entityContainer=e1, entityIsRoom=False)         # 3
         Entity.objects.create(entityClass="chair", entityContainer=e1, entityIsRoom=False)              # 4
         e5 = Entity.objects.create(entityClass="sideboard", entityContainer=e1, entityIsRoom=False)     # 5
         Entity.objects.create(entityClass="cut", entityContainer=e3, entityIsRoom=False)                # 6
-        Entity.objects.create(entityClass="apple", entityContainer=e3, entityIsRoom=False, entityCategory="fruit")              # 7
+        Entity.objects.create(entityClass="apple", entityContainer=e3, entityIsRoom=False,
+                              entityCategory="fruit")                                                   # 7
         e8 = Entity.objects.create(entityClass="tray", entityContainer=e3, entityIsRoom=False)          # 8
-        Entity.objects.create(entityClass="apple", entityContainer=e8, entityIsRoom=False, entityCategory="fruit")              # 9
+        Entity.objects.create(entityClass="apple", entityContainer=e8, entityIsRoom=False,
+                              entityCategory="fruit")                                                   # 9
         Entity.objects.create(entityClass="glass", entityContainer=e5, entityIsRoom=False)              # 10
         Entity.objects.create(entityClass="glass", entityContainer=e3, entityIsRoom=False)              # 11
         Entity.objects.create(entityClass="bed", entityContainer=e2, entityIsRoom=False)                # 12
@@ -35,6 +39,10 @@ class EntityTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(entity['entityId'], 1)
         self.assertEqual(entity['entityClass'], 'dining room')
+        self.assertEqual(entity['entityWaypointX'], 0)
+        self.assertEqual(entity['entityWaypointY'], 5)
+        self.assertEqual(entity['depth_waypoint'], 0)
+        self.assertEqual(entity['depth_position'], None)
 
     def test_get_multiple_object_in_same_room(self):
         response = self.client.get('/api/entity/', {'entityClass': 'apple'})
