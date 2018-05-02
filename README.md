@@ -122,13 +122,26 @@ Save all entities in the arena. Like rooms, objects, containers...
 
 **Response content if success:** The entity corresponding to the request, with the following form:
 
-|       key       |          description          |
-|:---------------:|:-----------------------------:|
-|    `entityId`   |  The id of the area           |
-|  `entityClass`  |  The yolo class of the entity |
-|  `entityName`   |  The name of the area         |
+|       key           |                  description                 |
+|:-------------------:|:--------------------------------------------:|
+|    `entityId`       |  The id of the entity                        |
+|    `entityClass`    |  The yolo class of the entity                |
+|    `entityName`     |  The name of the entity                      |
+|  `entityCategory`   |  The category of the entity                  |
+|  `entityContainer`  |  The container id of the entity              |
+|    `entityPosX`     |  Abscissa coordinate of the entity           |
+|    `entityPosY`     |  Ordinate coordinate of the entity           |
+|    `entityPosZ`     |  Altitude coordinate of the entity           |
+|   `entityPosYaw`    |  Yaw coordinate of the entity                |
+|  `entityPosPitch`   |  Pitch coordinate of the entity              |
+|   `entityPosRoll`   |  Roll coordinate of the entity               |
+|  `entityWaypointX`  |  Abscissa of the waypoint of the entity      |
+|  `entityWaypointY`  |  Ordinate of the waypoint of the entity      |
+| `entityWaypointYaw` |  Yaw of the waypoint of the entity           |
+|  `depth_waypoint`   |  Depth of kinship of the waypoint coordinate |
+|  `depth_position`   |  Depth of kinship of the entity coordinate   |
 
-### Get an entity specified by position in area, in descriptive way
+### Get an entity specified by position in the arena, in a verbal way
 
 **URL:** `/api/entity`
 
@@ -145,11 +158,25 @@ Save all entities in the arena. Like rooms, objects, containers...
 
 **Response content if success:** A list of entities corresponding to the filters, with the following form:
 
-|       key       |          description          |
-|:---------------:|:-----------------------------:|
-|    `entityId`   |  The id of the area           |
-|  `entityClass`  |  The yolo class of the entity |
-|  `entityName`   |  The name of the area         |
+|       key           |                  description                 |
+|:-------------------:|:--------------------------------------------:|
+|    `entityId`       |  The id of the entity                        |
+|    `entityClass`    |  The yolo class of the entity                |
+|    `entityName`     |  The name of the entity                      |
+|  `entityCategory`   |  The category of the entity                  |
+|  `entityContainer`  |  The container id of the entity              |
+|    `entityPosX`     |  Abscissa coordinate of the entity           |
+|    `entityPosY`     |  Ordinate coordinate of the entity           |
+|    `entityPosZ`     |  Altitude coordinate of the entity           |
+|   `entityPosYaw`    |  Yaw coordinate of the entity                |
+|  `entityPosPitch`   |  Pitch coordinate of the entity              |
+|   `entityPosRoll`   |  Roll coordinate of the entity               |
+|  `entityWaypointX`  |  Abscissa of the waypoint of the entity      |
+|  `entityWaypointY`  |  Ordinate of the waypoint of the entity      |
+| `entityWaypointYaw` |  Yaw of the waypoint of the entity           |
+|  `depth_waypoint`   |  Depth of kinship of the waypoint coordinate |
+|  `depth_position`   |  Depth of kinship of the entity coordinate   |
+
 
 # HELP
 ## PostMan
