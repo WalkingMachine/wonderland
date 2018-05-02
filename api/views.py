@@ -49,6 +49,10 @@ class EntityList(APIView):
                     Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_room))
                 )
 
+        if len(objects) <= 0:
+            serializer = EntitySerializer(None, many=True)
+            return Response(serializer.data)
+
         # For all object after filter
         for anObject in objects:
             next_object = anObject
@@ -88,6 +92,7 @@ class EntityList(APIView):
             serializer = EntitySerializer(objects[0], many=False)
         else:
             serializer = EntitySerializer(objects, many=True)
+
         return Response(serializer.data)
 
     # Add a room in the arena
