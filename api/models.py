@@ -6,6 +6,7 @@ class Entity(models.Model):
     entityId = models.AutoField(primary_key=True)
     entityClass = models.CharField(max_length=30)
     entityName = models.CharField(max_length=30, null=False, blank=True)
+    entityCategory = models.CharField(max_length=30, null=False, blank=True)
 
     # Entity attributes
     entityIsRoom = models.BooleanField(default=False, null=False, blank=True)
@@ -26,7 +27,7 @@ class Entity(models.Model):
     entityWaypointY = models.FloatField(default=None, null=True, blank=True)
     entityWaypointYaw = models.FloatField(default=None, null=True, blank=True)
 
-    # Just for serialiser
+    # Just for serializer
     depth_waypoint = models.IntegerField(null=True, blank=True)
     depth_position = models.IntegerField(null=True, blank=True)
 
