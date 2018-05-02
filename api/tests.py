@@ -13,9 +13,9 @@ class EntityTest(TestCase):
         Entity.objects.create(entityClass="chair", entityContainer=e1, entityIsRoom=False)              # 4
         e5 = Entity.objects.create(entityClass="sideboard", entityContainer=e1, entityIsRoom=False)     # 5
         Entity.objects.create(entityClass="cut", entityContainer=e3, entityIsRoom=False)                # 6
-        Entity.objects.create(entityClass="apple", entityContainer=e3, entityIsRoom=False)              # 7
+        Entity.objects.create(entityClass="apple", entityContainer=e3, entityIsRoom=False, entityCategory="fruit")              # 7
         e8 = Entity.objects.create(entityClass="tray", entityContainer=e3, entityIsRoom=False)          # 8
-        Entity.objects.create(entityClass="apple", entityContainer=e8, entityIsRoom=False)              # 9
+        Entity.objects.create(entityClass="apple", entityContainer=e8, entityIsRoom=False, entityCategory="fruit")              # 9
         Entity.objects.create(entityClass="glass", entityContainer=e5, entityIsRoom=False)              # 10
         Entity.objects.create(entityClass="glass", entityContainer=e3, entityIsRoom=False)              # 11
         Entity.objects.create(entityClass="bed", entityContainer=e2, entityIsRoom=False)                # 12
@@ -80,6 +80,14 @@ class EntityTest(TestCase):
         self.assertEqual(len(entity), 2)
         self.assertEqual(entity[0]['entityId'], 17)
         self.assertEqual(entity[1]['entityId'], 18)
+
+    def test_get_objects_by_category(self):
+        response = self.client.get('/api/entity/', {'entityCategory': 'fruit'})
+        entity = json.loads(response.content)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(entity), 2)
+        self.assertEqual(entity[0]['entityId'], 7)
+        self.assertEqual(entity[1]['entityId'], 9)
 
     # def test_post_view(self):
     #     response = self.client.post('/api/area/', {'name': 'garage',
