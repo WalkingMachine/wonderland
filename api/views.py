@@ -84,7 +84,7 @@ class EntityList(APIView):
     # Add a room in the arena
     def post(self, request, format=None):
 
-        # TODO select a verbal selection for container, instead of use ID.
+        # TODO add a verbal selection for container, instead of use ID.
 
         data = request.data
 
