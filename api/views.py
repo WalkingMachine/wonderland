@@ -53,21 +53,21 @@ class EntityList(APIView):
         for anObject in objects:
             next_object = anObject
             depth = 0
-            anObject.depth_waypoint = -1
-            anObject.depth_position = -1
+            anObject.depth_waypoint = None
+            anObject.depth_position = None
 
             # Find the first parent with a waypoint and the first parent with a geolocation.
-            while depth <= depth_limit and (anObject.depth_waypoint == -1 or anObject.depth_position == -1):
+            while depth <= depth_limit and (anObject.depth_waypoint is None or anObject.depth_position is None):
 
                 # Save the first and only the first waypoint location
-                if next_object.entityIsWaypoint and anObject.depth_waypoint == -1:
+                if next_object.entityIsWaypoint and anObject.depth_waypoint is None:
                     anObject.depth_waypoint = depth
                     anObject.entityWaypointX = next_object.entityWaypointX
                     anObject.entityWaypointY = next_object.entityWaypointY
                     anObject.entityWaypointYaw = next_object.entityWaypointYaw
 
                 # Save the first and only the first object location
-                if next_object.entityGotPosition and anObject.depth_position == -1:
+                if next_object.entityGotPosition and anObject.depth_position is None:
                     anObject.depth_position = depth
                     anObject.entityPosX = next_object.entityPosX
                     anObject.entityPosY = next_object.entityPosY
