@@ -11,6 +11,7 @@ class EntityList(APIView):
     def get(self, request, format=None):
         objects = Entity.objects.all()
         entity_class = request.query_params.get('entityClass', None)
+        entity_category = request.query_params.get('entityCategory', None)
         entity_container = request.query_params.get('entityContainer', None)
         entity_room = request.query_params.get('entityRoom', None)
         entity_id = request.query_params.get('entityId', None)
@@ -25,6 +26,11 @@ class EntityList(APIView):
             if entity_class is not None:
                 print "class"
                 objects = objects.filter(entityClass__iexact=str(entity_class))
+
+            # Filter by asked category
+            if entity_category is not None:
+                print "category"
+                objects = objects.filter(entityCategory__iexact=str(entity_category))
 
             # Filter by asked container
             if entity_container is not None:
