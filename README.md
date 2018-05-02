@@ -139,10 +139,11 @@ Save all entities in the arena. Like rooms, objects, containers...
 |        key       |            description            | optional |
 |:----------------:|:---------------------------------:|:--------:|
 |   `entityClass`  |  The yolo class of the entity     | &#10003; |
+| `entityCategory` |  The category of the object       | &#10003; |
 | `entityContainer`|  The yolo class of the container  | &#10003; |
 |   `entityRoom`   |  The name of the room             | &#10003; |
 
-**Response content if success:** A list of entities corresponding to the request, with the following form:
+**Response content if success:** A list of entities corresponding to the filters, with the following form:
 
 |       key       |          description          |
 |:---------------:|:-----------------------------:|
