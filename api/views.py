@@ -91,33 +91,21 @@ class EntityList(APIView):
         if not data._mutable:
             data._mutable = True
 
-        # For object position
-        entity_pos_x = data['entityPosX'] if 'entityPosX' in data else None
-        entity_pos_y = data['entityPosY'] if 'entityPosY' in data else None
-        entity_pos_z = data['entityPosZ'] if 'entityPosZ' in data else None
-        entity_pos_yaw = data['entityPosYaw'] if 'entityPosYaw' in data else None
-        entity_pos_pitch = data['entityPosPitch'] if 'entityPosPitch' in data else None
-        entity_pos_roll = data['entityPosRoll'] if 'entityPosRoll' in data else None
+            # For object position
+            entity_pos_x = data['entityPosX'] if 'entityPosX' in data else None
+            entity_pos_y = data['entityPosY'] if 'entityPosY' in data else None
+            entity_pos_z = data['entityPosZ'] if 'entityPosZ' in data else None
 
-        entity_got_position = (entity_pos_x is not None or
-                               entity_pos_y is not None or
-                               entity_pos_z is not None or
-                               entity_pos_yaw is not None or
-                               entity_pos_pitch is not None or
-                               entity_pos_roll is not None)
+            data['entityGotPosition'] = (entity_pos_x is not None and
+                                         entity_pos_y is not None and
+                                         entity_pos_z is not None)
 
-        data['entityGotPosition'] = entity_got_position
+            # For waypoint
+            entity_waypoint_x = data['entityWaypointX'] if 'entityWaypointX' in data else None
+            entity_waypoint_y = data['entityWaypointY'] if 'entityWaypointY' in data else None
 
-        # For waypoint
-        entity_waypoint_x = data['entityWaypointX'] if 'entityWaypointX' in data else None
-        entity_waypoint_y = data['entityWaypointY'] if 'entityWaypointY' in data else None
-        entity_waypoint_yaw = data['entityWaypointYaw'] if 'entityWaypointYaw' in data else None
-
-        entity_is_waypoint = (entity_waypoint_x is not None or
-                              entity_waypoint_y is not None or
-                              entity_waypoint_yaw is not None)
-
-        data['entityIsWaypoint'] = entity_is_waypoint
+            data['entityIsWaypoint'] = (entity_waypoint_x is not None and
+                                        entity_waypoint_y is not None)
 
         serializer = EntitySerializer(data=data)
 
