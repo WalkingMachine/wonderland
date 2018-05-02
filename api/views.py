@@ -64,14 +64,18 @@ class EntityList(APIView):
             while depth <= depth_limit and (anObject.depth_waypoint is None or anObject.depth_position is None):
 
                 # Save the first and only the first waypoint location
-                if next_object.entityIsWaypoint and anObject.depth_waypoint is None:
+                if (next_object.entityWaypointX is not None
+                        and next_object.entityWaypointY is not None
+                        and anObject.depth_waypoint is None):
                     anObject.depth_waypoint = depth
                     anObject.entityWaypointX = next_object.entityWaypointX
                     anObject.entityWaypointY = next_object.entityWaypointY
                     anObject.entityWaypointYaw = next_object.entityWaypointYaw
 
                 # Save the first and only the first object location
-                if next_object.entityGotPosition and anObject.depth_position is None:
+                if (next_object.entityPosX is not None
+                        and next_object.entityPosY is not None
+                        and anObject.depth_position is None):
                     anObject.depth_position = depth
                     anObject.entityPosX = next_object.entityPosX
                     anObject.entityPosY = next_object.entityPosY
@@ -104,22 +108,6 @@ class EntityList(APIView):
 
         if not data._mutable:
             data._mutable = True
-
-            # For object position
-            entity_pos_x = data['entityPosX'] if 'entityPosX' in data else None
-            entity_pos_y = data['entityPosY'] if 'entityPosY' in data else None
-            entity_pos_z = data['entityPosZ'] if 'entityPosZ' in data else None
-
-            data['entityGotPosition'] = (entity_pos_x is not None and
-                                         entity_pos_y is not None and
-                                         entity_pos_z is not None)
-
-            # For waypoint
-            entity_waypoint_x = data['entityWaypointX'] if 'entityWaypointX' in data else None
-            entity_waypoint_y = data['entityWaypointY'] if 'entityWaypointY' in data else None
-
-            data['entityIsWaypoint'] = (entity_waypoint_x is not None and
-                                        entity_waypoint_y is not None)
 
         serializer = EntitySerializer(data=data)
 
