@@ -30,10 +30,9 @@ class EntityTest(TestCase):
 
     def test_get_by_id_view(self):
         response = self.client.get('/api/entity/', {'entityId': 1})
-        entity = json.loads(response.content)[0]
+        entity = json.loads(response.content)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(json.loads(response.content)), 1)
         self.assertEqual(entity['entityId'], 1)
         self.assertEqual(entity['entityClass'], 'dining room')
 
