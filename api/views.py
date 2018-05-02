@@ -18,23 +18,19 @@ class EntityList(APIView):
         depth_limit = request.query_params.get('depthLimit', 3)
 
         if entity_id is not None:
-            print "ID:" + entity_id
             objects = objects.filter(entityId__iexact=str(entity_id))
 
         else:
             # Filter by asked class
             if entity_class is not None:
-                print "class"
                 objects = objects.filter(entityClass__iexact=str(entity_class))
 
             # Filter by asked category
             if entity_category is not None:
-                print "category"
                 objects = objects.filter(entityCategory__iexact=str(entity_category))
 
             # Filter by asked container
             if entity_container is not None:
-                print "container"
                 objects = objects.filter(
                     Q(entityContainer__entityClass__iexact=str(entity_container)) |
                     Q(entityContainer__entityContainer__entityClass__iexact=str(entity_container)) |
@@ -42,7 +38,6 @@ class EntityList(APIView):
 
             # Filter by asked room
             if entity_room is not None:
-                print "room"
                 objects = objects.filter(
                     Q(entityContainer__entityClass__iexact=str(entity_room)) |
                     Q(entityContainer__entityContainer__entityClass__iexact=str(entity_room)) |

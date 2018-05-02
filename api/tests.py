@@ -117,8 +117,6 @@ class EntityTest(TestCase):
                                                      'entityWaypointX': -10, 'entityWaypointY': -15})
         self.assertEqual(response.status_code, 201)
 
-        print(response)
-
         response = self.client.get('/api/entity/', {'entityId': 21})
         self.assertEqual(response.status_code, 200)
 
@@ -134,7 +132,6 @@ class EntityTest(TestCase):
                                                      'entityContainer': 19,
                                                      'entityPosX': 2, 'entityPosY': 22, 'entityPosZ': 1.5})
 
-        print(response)
         self.assertEqual(response.status_code, 201)
 
         response = self.client.get('/api/entity/', {'entityId': 21})
@@ -149,4 +146,3 @@ class EntityTest(TestCase):
         self.assertEqual(entity['entityPosYaw'], None)
         self.assertEqual(entity['depth_waypoint'], 1)
         self.assertEqual(entity['depth_position'], 0)
-
