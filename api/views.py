@@ -84,7 +84,12 @@ class EntityList(APIView):
                 next_object = next_object.entityContainer
                 depth += 1
 
-        serializer = EntitySerializer(objects, many=True)
+        if entity_id is not None:
+            objects = objects.filter(entityId__iexact=str(entity_id))
+            serializer = EntitySerializer(objects[0], many=False)
+        else:
+            objects = objects.filter(entityId__iexact=str(entity_id))
+            serializer = EntitySerializer(objects, many=True)
         return Response(serializer.data)
 
     # Add a room in the arena
