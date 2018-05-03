@@ -12,8 +12,7 @@ class EntityList(APIView):
         objects = Entity.objects.all()
         entity_class = request.query_params.get('entityClass', None)
         entity_category = request.query_params.get('entityCategory', None)
-        entity_container = request.query_params.get('entityContainer', None)
-        entity_room = request.query_params.get('entityRoom', None)
+        entity_containers = request.query_params.getlist('entityContainer')
         entity_id = request.query_params.get('entityId', None)
         depth_limit = request.query_params.get('depthLimit', 3)
 
@@ -29,20 +28,12 @@ class EntityList(APIView):
             if entity_category is not None:
                 objects = objects.filter(entityCategory__iexact=str(entity_category))
 
-            # Filter by asked container
-            if entity_container is not None:
+            # Filter by asked containers
+            for entity_container in entity_containers:
                 objects = objects.filter(
                     Q(entityContainer__entityClass__iexact=str(entity_container)) |
                     Q(entityContainer__entityContainer__entityClass__iexact=str(entity_container)) |
                     Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_container)))
-
-            # Filter by asked room
-            if entity_room is not None:
-                objects = objects.filter(
-                    Q(entityContainer__entityClass__iexact=str(entity_room)) |
-                    Q(entityContainer__entityContainer__entityClass__iexact=str(entity_room)) |
-                    Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_room))
-                )
 
         if len(objects) <= 0:
             serializer = EntitySerializer(None, many=True)
