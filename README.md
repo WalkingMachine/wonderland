@@ -79,6 +79,15 @@ python manage.py migrate --run-syncdb
 python manage.py runserver
 ```
 
+# Load/dump existing data  
+
+### Dump data from actual database  
+> python manage.py dumpdata api > api/wonderland_db.json 
+
+### Load data from JSON file
+> python manage.py loaddata api/wonderland_db.json
+
+
 # Uses
 
 ## For Entities
