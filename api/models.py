@@ -7,8 +7,9 @@ class Entity(models.Model):
     entityClass = models.CharField(max_length=30)
     entityName = models.CharField(max_length=30, null=False, blank=True)
     entityCategory = models.CharField(max_length=30, null=False, blank=True)
+    entityColor = models.CharField(max_length=30, null=True, blank=True)
 
-    # Entity attributes
+
     entityIsRoom = models.BooleanField(default=False, null=False, blank=True)
     entityIsWaypoint = models.BooleanField(default=False, null=False, blank=True)
     entityIsContainer = models.BooleanField(default=False, null=False, blank=True)
