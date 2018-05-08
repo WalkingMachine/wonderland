@@ -60,13 +60,7 @@ python manage.py createsuperuser
 
 4. Generate a new API key
 
-+ Go to the api administration page (usually [localhost:8000/admin/](http://localhost:8000/admin/rest_framework_api_key/apikey/))
-
-+ Create a new api-key
-
-+ Save this api-key for use in the application or for test.
-
-> The api-key will be given by a message like this: `The API Key for tests is 0801911fea20713b7416e88164a357eac6de3f3a. Please note it since you will not be able to see it again.`
+> Finally the api key is not needed for use the api.
 
 5. Migration
 ```bash
@@ -81,12 +75,15 @@ python manage.py runserver
 
 # Load/dump existing data  
 
-### Dump data from actual database  
-> python manage.py dumpdata api > api/wonderland_db.json 
+### Dump data from actual database  
+```bash
+python manage.py dumpdata api > api/wonderland_db.json 
+```
 
 ### Load data from JSON file
+```bash
 > python manage.py loaddata api/wonderland_db.json
-
+```
 
 # Uses
 
@@ -112,9 +109,9 @@ Save all entities in the arena. Like rooms, objects, containers...
 
 |       key       |          description          |
 |:---------------:|:-----------------------------:|
-|    `entityId`   |  The id of the area           |
+|    `entityId`   |  The id of the entity         |
 |  `entityClass`  |  The yolo class of the entity |
-|  `entityName`   |  The name of the area         |
+|  `entityName`   |  The name of the entity       |
 
 ### Get an entity specified by ID
 
