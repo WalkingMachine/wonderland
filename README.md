@@ -82,7 +82,7 @@ python manage.py dumpdata api > api/wonderland_db.json
 
 ### Load data from JSON file
 ```bash
-> python manage.py loaddata api/wonderland_db.json
+python manage.py loaddata api/wonderland_db.json
 ```
 
 # Uses
