@@ -133,6 +133,9 @@ Save all entities in the arena. Like rooms, objects, containers...
 |    `entityClass`    |  The yolo class of the entity                |
 |    `entityName`     |  The name of the entity                      |
 |  `entityCategory`   |  The category of the entity                  |
+|    `entityColor`    |  The color of the entity                     |
+|   `entityWeight`    |  The weight of the entity                    |
+|    `entitySize`     |  The size of the entity                      |
 |  `entityContainer`  |  The container id of the entity              |
 |    `entityPosX`     |  Abscissa coordinate of the entity           |
 |    `entityPosY`     |  Ordinate coordinate of the entity           |
@@ -168,6 +171,9 @@ Save all entities in the arena. Like rooms, objects, containers...
 |    `entityClass`    |  The yolo class of the entity                |
 |    `entityName`     |  The name of the entity                      |
 |  `entityCategory`   |  The category of the entity                  |
+|    `entityColor`    |  The color of the entity                     |
+|   `entityWeight`    |  The weight of the entity                    |
+|    `entitySize`     |  The size of the entity                      |
 |  `entityContainer`  |  The container id of the entity              |
 |    `entityPosX`     |  Abscissa coordinate of the entity           |
 |    `entityPosY`     |  Ordinate coordinate of the entity           |
