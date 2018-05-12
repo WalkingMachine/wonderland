@@ -52,6 +52,8 @@ class People(models.Model):
     peopleGender = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
     peopleGenderAccurate = models.FloatField(default=None, null=True, blank=True)
 
+    peopleIsOperator = models.BooleanField(default=False)
+
     def __str__(self):
         return str(self.peopleId) + "(" + str(
             self.peopleRecognitionId) + ") - " + self.peopleGender + " - " + self.peopleColor + " - " + self.peoplePose

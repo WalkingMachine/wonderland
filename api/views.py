@@ -118,6 +118,7 @@ class PeopleList(APIView):
         people_color = request.query_params.get('peopleColor', None)
         people_pose = request.query_params.get('peoplePose', None)
         people_gender = request.query_params.get('peopleGender', None)
+        people_is_operator = request.query_params.get('peopleIsOperator', None)
 
         if people_id is not None:
             objects = objects.filter(peopleId__iexact=people_id)
@@ -133,6 +134,8 @@ class PeopleList(APIView):
                 objects = objects.filter(peoplePose__icontains=people_pose)
             if people_gender is not None:
                 objects = objects.filter(peopleGender__iexact=people_gender)
+            if people_is_operator is not None:
+                objects = objects.filter(peopleIsOperator__iexact=people_is_operator)
 
         if people_id is not None or people_recognition_id is not None:
             if len(objects) <= 0:

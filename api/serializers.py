@@ -18,5 +18,5 @@ class PeopleSerializer(serializers.ModelSerializer):
         model = People
         fields = ('peopleId', 'peopleRecognitionId', 'peopleColor',
                   'peoplePose', 'peoplePoseAccurate',
-                  'peopleGender', 'peopleGenderAccurate'
+                  'peopleGender', 'peopleGenderAccurate', 'peopleIsOperator'
                   )
