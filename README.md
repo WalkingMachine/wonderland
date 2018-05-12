@@ -247,6 +247,44 @@ Save all entities in the arena. Like rooms, objects, containers...
 |  `depth_waypoint`   |  Depth of kinship of the waypoint coordinate |
 |  `depth_position`   |  Depth of kinship of the entity coordinate   |
 
+## For People
+
+### Add a person in the list
+
+**URL:** `/api/people`
+
+**Method:** `POST`
+
+**Request content:**
+
+|        key           |          description          | Optional |
+|:--------------------:|:-----------------------------:|:--------:|
+| `peopleRecognitionId`|  The face recognition ID      |          |
+|     `peopleColor`    |  The person color             | &#10003; |
+|     `peoplePose`     |  The person pose              | &#10003; |
+| `peoplePoseAccuracy` |  The person pose accuracy     | &#10003; |
+|    `peopleGender`    |  The person gender            | &#10003; |
+|`peopleGenderAccuracy`|  The person gender accuracy   | &#10003; |
+|  `peopleIsOperator`  |  Save if this is the operator | &#10003; |
+
+**Response content if success:** The added element in this form
+
+|          key         |          description          |
+|:--------------------:|:-----------------------------:|
+|      `peopleId`      |  The person Unique ID         |
+| `peopleRecognitionId`|  The face recognition ID      |
+|     `peopleColor`    |  The person color             |
+|     `peoplePose`     |  The person pose              |
+| `peoplePoseAccuracy` |  The person pose accuracy     |
+|    `peopleGender`    |  The person gender            |
+|`peopleGenderAccuracy`|  The person gender accuracy   |
+|  `peopleIsOperator`  |  Save if this is the operator |
+
+**Response content if exist:**
+
+|         key         |                         text                         |
+|:-------------------:|:----------------------------------------------------:|
+|`peopleRecognitionId`|`people with this peopleRecognitionId already exists.`|
 
 # HELP
 ## PostMan
