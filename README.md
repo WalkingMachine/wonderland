@@ -286,6 +286,27 @@ Save all entities in the arena. Like rooms, objects, containers...
 |:-------------------:|:----------------------------------------------------:|
 |`peopleRecognitionId`|`people with this peopleRecognitionId already exists.`|
 
+### Get all persons
+
+**URL:** `/api/entity`
+
+**Method:** `GET`
+
+**Request content:** `Nothing`
+
+**Response content if success:** A list of persons with the following form:
+
+|          key         |          description          |
+|:--------------------:|:-----------------------------:|
+|      `peopleId`      |  The person Unique ID         |
+| `peopleRecognitionId`|  The face recognition ID      |
+|     `peopleColor`    |  The person color             |
+|     `peoplePose`     |  The person pose              |
+| `peoplePoseAccuracy` |  The person pose accuracy     |
+|    `peopleGender`    |  The person gender            |
+|`peopleGenderAccuracy`|  The person gender accuracy   |
+|  `peopleIsOperator`  |  Save if this is the operator |
+
 # HELP
 ## PostMan
 *Recommendation*
