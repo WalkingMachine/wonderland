@@ -47,10 +47,10 @@ class People(models.Model):
     peopleColor = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
 
     peoplePose = models.CharField(max_length=30, default='Unknown', null=True, blank=True)
-    peoplePoseAccurate = models.FloatField(default=None, null=True, blank=True)
+    peoplePoseAccuracy = models.FloatField(default=None, null=True, blank=True)
 
     peopleGender = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
-    peopleGenderAccurate = models.FloatField(default=None, null=True, blank=True)
+    peopleGenderAccuracy = models.FloatField(default=None, null=True, blank=True)
 
     peopleIsOperator = models.BooleanField(default=False)
 
