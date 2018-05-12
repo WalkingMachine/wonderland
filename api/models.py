@@ -37,3 +37,20 @@ class Entity(models.Model):
 
     def __str__(self):
         return self.entityClass + " - " + str(self.entityId)
+
+
+# Description of an object in the arena
+class People(models.Model):
+    peopleId = models.AutoField(primary_key=True)
+    peopleRecognitionId = models.IntegerField(null=True, default=None, blank=True)
+
+    peopleColor = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
+
+    peoplePose = models.CharField(max_length=30, default='Unknown', null=True, blank=True)
+    peoplePoseAccurate = models.FloatField(default=None, null=True, blank=True)
+
+    peopleGender = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
+    peopleGenderAccurate = models.FloatField(default=None, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.peopleId) + " - " + self.peopleColor
