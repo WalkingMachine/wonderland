@@ -135,7 +135,10 @@ class PeopleList(APIView):
                 objects = objects.filter(peopleGender__iexact=people_gender)
 
         if people_id is not None or people_recognition_id is not None:
-            serializer = PeopleSerializer(objects[0], many=False)
+            if len(objects) <= 0:
+                serializer = PeopleSerializer(None, many=True)
+            else:
+                serializer = PeopleSerializer(objects[0], many=False)
         else:
             serializer = PeopleSerializer(objects, many=True)
 
