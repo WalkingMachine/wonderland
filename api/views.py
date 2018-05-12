@@ -1,9 +1,10 @@
-from .models import Entity
-from .serializers import EntitySerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from django.db.models import Q
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from models import Entity, People
+from serializers import EntitySerializer
 
 
 class EntityList(APIView):
@@ -102,3 +103,11 @@ class EntityList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PeopleList(APIView):
+    # List all Entity or create a new entity.
+    def get(self, request, format=None):
+        objects = People.objects.all()
+        serializer = EntitySerializer(objects[0], many=False)
+        return Response(serializer.data)
