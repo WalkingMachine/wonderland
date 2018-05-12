@@ -4,11 +4,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from models import Entity, People
-from serializers import EntitySerializer
+from serializers import EntitySerializer, PeopleSerializer
 
 
 class EntityList(APIView):
-    # List all Entity or create a new entity.
+    # List all entity
     def get(self, request, format=None):
         objects = Entity.objects.all()
         entity_class = request.query_params.get('entityClass', None)
@@ -86,7 +86,7 @@ class EntityList(APIView):
 
         return Response(serializer.data)
 
-    # Add a room in the arena
+    # Add an entity in the arena
     def post(self, request, format=None):
 
         # TODO add a verbal selection for container, instead of use ID.
@@ -106,8 +106,23 @@ class EntityList(APIView):
 
 
 class PeopleList(APIView):
-    # List all Entity or create a new entity.
+    # List all peoples
     def get(self, request, format=None):
         objects = People.objects.all()
-        serializer = EntitySerializer(objects[0], many=False)
+        serializer = PeopleSerializer(objects[0], many=False)
         return Response(serializer.data)
+
+    # Add a people in the arena
+    def post(self, request, format=None):
+        data = request.data
+
+        if not data._mutable:
+            data._mutable = True
+
+        serializer = PeopleSerializer(data=data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
