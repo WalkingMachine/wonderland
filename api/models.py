@@ -53,4 +53,5 @@ class People(models.Model):
     peopleGenderAccurate = models.FloatField(default=None, null=True, blank=True)
 
     def __str__(self):
-        return str(self.peopleId) + " - " + self.peopleGender + " - " + self.peopleColor + " - " + self.peoplePose
+        return str(self.peopleId) + "(" + str(
+            self.peopleRecognitionId) + ") - " + self.peopleGender + " - " + self.peopleColor + " - " + self.peoplePose
