@@ -9,7 +9,8 @@ from serializers import EntitySerializer, PeopleSerializer
 
 class EntityList(APIView):
     # List all entity
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request):
         objects = Entity.objects.all()
         entity_class = request.query_params.get('entityClass', None)
         entity_category = request.query_params.get('entityCategory', None)
@@ -47,7 +48,7 @@ class EntityList(APIView):
             anObject.depth_waypoint = None
             anObject.depth_position = None
 
-            # Find the first parent with a waypoint and the first parent with a geolocation.
+            # Find the first parent with a waypoint and the first parent with a location.
             while depth <= depth_limit and (anObject.depth_waypoint is None or anObject.depth_position is None):
 
                 # Save the first and only the first waypoint location
@@ -87,13 +88,14 @@ class EntityList(APIView):
         return Response(serializer.data)
 
     # Add an entity in the arena
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request):
 
         # TODO add a verbal selection for container, instead of use ID.
 
         data = request.data
 
-        if not data._mutable:
+        if hasattr(data, '_mutable') and not data._mutable:
             data._mutable = True
 
         serializer = EntitySerializer(data=data)
@@ -107,16 +109,18 @@ class EntityList(APIView):
 
 class PeopleList(APIView):
     # List all peoples
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request):
         objects = People.objects.all()
         serializer = PeopleSerializer(objects, many=True)
         return Response(serializer.data)
 
     # Add a people in the arena
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request):
         data = request.data
 
-        if not data._mutable:
+        if hasattr(data, '_mutable') and not data._mutable:
             data._mutable = True
 
         serializer = PeopleSerializer(data=data)
