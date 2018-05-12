@@ -109,7 +109,7 @@ class PeopleList(APIView):
     # List all peoples
     def get(self, request, format=None):
         objects = People.objects.all()
-        serializer = PeopleSerializer(objects[0], many=False)
+        serializer = PeopleSerializer(objects, many=True)
         return Response(serializer.data)
 
     # Add a people in the arena
