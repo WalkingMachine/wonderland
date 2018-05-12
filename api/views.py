@@ -122,10 +122,11 @@ class PeopleList(APIView):
         if people_id is not None:
             objects = objects.filter(peopleId__iexact=people_id)
 
+        elif people_recognition_id is not None:
+            objects = objects.filter(peopleRecognitionId__iexact=people_recognition_id)
+
         else:
             # Filter by asked class
-            if people_recognition_id is not None:
-                objects = objects.filter(peopleRecognitionId__iexact=people_recognition_id)
             if people_color is not None:
                 objects = objects.filter(peopleColor__icontains=people_color)
             if people_pose is not None:
@@ -133,7 +134,11 @@ class PeopleList(APIView):
             if people_gender is not None:
                 objects = objects.filter(peopleGender__iexact=people_gender)
 
-        serializer = PeopleSerializer(objects, many=True)
+        if people_id is not None or people_recognition_id is not None:
+            serializer = PeopleSerializer(objects[0], many=False)
+        else:
+            serializer = PeopleSerializer(objects, many=True)
+
         return Response(serializer.data)
 
     # Add a people in the arena
