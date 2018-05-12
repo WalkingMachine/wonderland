@@ -93,9 +93,53 @@ Save all entities in the arena. Like rooms, objects, containers...
 
 ### Add an entity in the list
 
-**Method:** POST
+**URL:** `/api/entity`
 
-> TODO
+**Method:** `POST`
+
+**Request content:**
+
+|       key           |                  description                 | Optional |
+|:-------------------:|:--------------------------------------------:|:--------:|
+|    `entityClass`    |  The yolo class of the entity                |          |
+|    `entityName`     |  The name of the entity                      | &#10003; |
+|  `entityCategory`   |  The category of the entity                  | &#10003; |
+|    `entityColor`    |  The color of the entity                     | &#10003; |
+|   `entityWeight`    |  The weight of the entity                    | &#10003; |
+|    `entitySize`     |  The size of the entity                      | &#10003; |
+|  `entityContainer`  |  The container id of the entity              | &#10003; |
+|    `entityPosX`     |  Abscissa coordinate of the entity           | &#10003; |
+|    `entityPosY`     |  Ordinate coordinate of the entity           | &#10003; |
+|    `entityPosZ`     |  Altitude coordinate of the entity           | &#10003; |
+|   `entityPosYaw`    |  Yaw coordinate of the entity                | &#10003; |
+|  `entityPosPitch`   |  Pitch coordinate of the entity              | &#10003; |
+|   `entityPosRoll`   |  Roll coordinate of the entity               | &#10003; |
+|  `entityWaypointX`  |  Abscissa of the waypoint of the entity      | &#10003; |
+|  `entityWaypointY`  |  Ordinate of the waypoint of the entity      | &#10003; |
+| `entityWaypointYaw` |  Yaw of the waypoint of the entity           | &#10003; |
+
+**Response content if success:** The added element in this form
+
+|       key           |                  description                 |
+|:-------------------:|:--------------------------------------------:|
+|    `entityId`       |  The id of the entity                        |
+|    `entityName`     |  The name of the entity                      |
+|    `entityClass`    |  The yolo class of the entity                |
+|    `entityName`     |  The name of the entity                      |
+|  `entityCategory`   |  The category of the entity                  |
+|    `entityColor`    |  The color of the entity                     |
+|   `entityWeight`    |  The weight of the entity                    |
+|    `entitySize`     |  The size of the entity                      |
+|  `entityContainer`  |  The container id of the entity              |
+|    `entityPosX`     |  Abscissa coordinate of the entity           |
+|    `entityPosY`     |  Ordinate coordinate of the entity           |
+|    `entityPosZ`     |  Altitude coordinate of the entity           |
+|   `entityPosYaw`    |  Yaw coordinate of the entity                |
+|  `entityPosPitch`   |  Pitch coordinate of the entity              |
+|   `entityPosRoll`   |  Roll coordinate of the entity               |
+|  `entityWaypointX`  |  Abscissa of the waypoint of the entity      |
+|  `entityWaypointY`  |  Ordinate of the waypoint of the entity      |
+| `entityWaypointYaw` |  Yaw of the waypoint of the entity           |
 
 ### Get all entities
 
