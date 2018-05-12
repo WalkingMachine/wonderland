@@ -147,6 +147,24 @@ class PeopleList(APIView):
 
         return Response(serializer.data)
 
+    @staticmethod
+    def patch(request):
+        if hasattr(request.data, 'peopleId'):
+            people = People.objects.get(peopleId__iexact=request.data['peopleId'])
+
+        elif hasattr(request.data, 'peopleRecognitionId'):
+            people = People.objects.get(peopleRecognitionId__iexact=request.data['peopleRecognitionId'])
+
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = PeopleSerializer(instance=people, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     # Add a people in the arena
     @staticmethod
     def post(request):
