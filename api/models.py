@@ -11,10 +11,10 @@ class Entity(models.Model):
     entityWeight = models.FloatField(default=None, null=True, blank=True)
     entitySize = models.FloatField(default=None, null=True, blank=True)
 
-    entityIsRoom = models.BooleanField(default=False, null=False, blank=True)
-    entityIsWaypoint = models.BooleanField(default=False, null=False, blank=True)
-    entityIsContainer = models.BooleanField(default=False, null=False, blank=True)
-    entityGotPosition = models.BooleanField(default=False, null=False, blank=True)
+    entityIsRoom = models.BooleanField(default=False, blank=True)
+    entityIsWaypoint = models.BooleanField(default=False, blank=True)
+    entityIsContainer = models.BooleanField(default=False, blank=True)
+    entityGotPosition = models.BooleanField(default=False, blank=True)
 
     # The position of the object in space if available
     entityPosX = models.FloatField(default=None, null=True, blank=True)
