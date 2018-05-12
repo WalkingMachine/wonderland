@@ -1,8 +1,10 @@
 from __future__ import print_function
-from django.test import TestCase
-from models import Entity
 
 import json
+
+from django.test import TestCase
+
+from models import Entity
 
 
 class EntityTest(TestCase):
@@ -138,3 +140,5 @@ class EntityTest(TestCase):
         self.assertEqual(entity['entityPosYaw'], None)
         self.assertEqual(entity['depth_waypoint'], 1)
         self.assertEqual(entity['depth_position'], 0)
+
+        # TODO: Add tests for People requests...
