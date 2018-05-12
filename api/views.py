@@ -131,7 +131,7 @@ class PeopleList(APIView):
             if people_pose is not None:
                 objects = objects.filter(peoplePose__icontains=people_pose)
             if people_gender is not None:
-                objects = objects.filter(peopleGender__icontains=people_gender)
+                objects = objects.filter(peopleGender__iexact=people_gender)
 
         serializer = PeopleSerializer(objects, many=True)
         return Response(serializer.data)
