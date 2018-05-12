@@ -112,6 +112,27 @@ class PeopleList(APIView):
     @staticmethod
     def get(request):
         objects = People.objects.all()
+
+        people_id = request.query_params.get('peopleId', None)
+        people_recognition_id = request.query_params.get('peopleRecognitionId', None)
+        people_color = request.query_params.get('peopleColor', None)
+        people_pose = request.query_params.get('peoplePose', None)
+        people_gender = request.query_params.get('peopleGender', None)
+
+        if people_id is not None:
+            objects = objects.filter(peopleId__iexact=people_id)
+
+        else:
+            # Filter by asked class
+            if people_recognition_id is not None:
+                objects = objects.filter(peopleRecognitionId__iexact=people_recognition_id)
+            if people_color is not None:
+                objects = objects.filter(peopleColor__icontains=people_color)
+            if people_pose is not None:
+                objects = objects.filter(peoplePose__icontains=people_pose)
+            if people_gender is not None:
+                objects = objects.filter(peopleGender__icontains=people_gender)
+
         serializer = PeopleSerializer(objects, many=True)
         return Response(serializer.data)
 
