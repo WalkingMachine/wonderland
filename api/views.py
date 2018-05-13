@@ -1,14 +1,16 @@
-from .models import Entity
-from .serializers import EntitySerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from django.db.models import Q
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from models import Entity, People
+from serializers import EntitySerializer, PeopleSerializer
 
 
 class EntityList(APIView):
-    # List all Entity or create a new entity.
-    def get(self, request, format=None):
+    # List all entity
+    @staticmethod
+    def get(request):
         objects = Entity.objects.all()
         entity_class = request.query_params.get('entityClass', None)
         entity_category = request.query_params.get('entityCategory', None)
@@ -46,7 +48,7 @@ class EntityList(APIView):
             anObject.depth_waypoint = None
             anObject.depth_position = None
 
-            # Find the first parent with a waypoint and the first parent with a geolocation.
+            # Find the first parent with a waypoint and the first parent with a location.
             while depth <= depth_limit and (anObject.depth_waypoint is None or anObject.depth_position is None):
 
                 # Save the first and only the first waypoint location
@@ -85,17 +87,100 @@ class EntityList(APIView):
 
         return Response(serializer.data)
 
-    # Add a room in the arena
-    def post(self, request, format=None):
+    # Add an entity in the arena
+    @staticmethod
+    def post(request):
 
         # TODO add a verbal selection for container, instead of use ID.
 
         data = request.data
 
-        if not data._mutable:
+        if hasattr(data, '_mutable') and not data._mutable:
             data._mutable = True
 
         serializer = EntitySerializer(data=data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PeopleList(APIView):
+    # List all peoples
+    @staticmethod
+    def get(request):
+        objects = People.objects.all()
+
+        people_id = request.query_params.get('peopleId', None)
+        people_recognition_id = request.query_params.get('peopleRecognitionId', None)
+        people_color = request.query_params.get('peopleColor', None)
+        people_pose = request.query_params.get('peoplePose', None)
+        people_gender = request.query_params.get('peopleGender', None)
+        people_is_operator = request.query_params.get('peopleIsOperator', None)
+
+        if people_id is not None:
+            objects = objects.filter(peopleId__iexact=people_id)
+
+        elif people_recognition_id is not None:
+            objects = objects.filter(peopleRecognitionId__iexact=people_recognition_id)
+
+        else:
+            # Filter by asked class
+            if people_color is not None:
+                objects = objects.filter(peopleColor__icontains=people_color)
+            if people_pose is not None:
+                objects = objects.filter(peoplePose__icontains=people_pose)
+            if people_gender is not None:
+                objects = objects.filter(peopleGender__iexact=people_gender)
+            if people_is_operator is not None:
+                objects = objects.filter(peopleIsOperator__iexact=people_is_operator)
+
+        if people_id is not None or people_recognition_id is not None:
+            if len(objects) <= 0:
+                serializer = PeopleSerializer(None, many=True)
+            else:
+                serializer = PeopleSerializer(objects[0], many=False)
+        else:
+            serializer = PeopleSerializer(objects, many=True)
+
+        return Response(serializer.data)
+
+    @staticmethod
+    def patch(request):
+        data = request.data.dict()
+        if 'peopleId' in data:
+            try:
+                people = People.objects.get(peopleId__iexact=data['peopleId'])
+            except People.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+        elif 'peopleRecognitionId' in data:
+            try:
+                people = People.objects.get(peopleRecognitionId__iexact=data['peopleRecognitionId'])
+            except People.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = PeopleSerializer(instance=people, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # Add a people in the arena
+    @staticmethod
+    def post(request):
+        data = request.data
+
+        if hasattr(data, '_mutable') and not data._mutable:
+            data._mutable = True
+
+        serializer = PeopleSerializer(data=data)
 
         if serializer.is_valid():
             serializer.save()

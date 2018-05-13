@@ -11,10 +11,10 @@ class Entity(models.Model):
     entityWeight = models.FloatField(default=None, null=True, blank=True)
     entitySize = models.FloatField(default=None, null=True, blank=True)
 
-    entityIsRoom = models.BooleanField(default=False, null=False, blank=True)
-    entityIsWaypoint = models.BooleanField(default=False, null=False, blank=True)
-    entityIsContainer = models.BooleanField(default=False, null=False, blank=True)
-    entityGotPosition = models.BooleanField(default=False, null=False, blank=True)
+    entityIsRoom = models.BooleanField(default=False, blank=True)
+    entityIsWaypoint = models.BooleanField(default=False, blank=True)
+    entityIsContainer = models.BooleanField(default=False, blank=True)
+    entityGotPosition = models.BooleanField(default=False, blank=True)
 
     # The position of the object in space if available
     entityPosX = models.FloatField(default=None, null=True, blank=True)
@@ -37,3 +37,23 @@ class Entity(models.Model):
 
     def __str__(self):
         return self.entityClass + " - " + str(self.entityId)
+
+
+# Description of an object in the arena
+class People(models.Model):
+    peopleId = models.AutoField(primary_key=True)
+    peopleRecognitionId = models.IntegerField(null=False, blank=False, unique=True)
+
+    peopleColor = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
+
+    peoplePose = models.CharField(max_length=30, default='Unknown', null=True, blank=True)
+    peoplePoseAccuracy = models.FloatField(default=None, null=True, blank=True)
+
+    peopleGender = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
+    peopleGenderAccuracy = models.FloatField(default=None, null=True, blank=True)
+
+    peopleIsOperator = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.peopleId) + "(" + str(
+            self.peopleRecognitionId) + ") - " + self.peopleGender + " - " + self.peopleColor + " - " + self.peoplePose
