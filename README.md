@@ -328,7 +328,7 @@ Save all entities in the arena. Like rooms, objects, containers...
 
 ### Get all persons
 
-**URL:** `/api/entity`
+**URL:** `/api/people`
 
 **Method:** `GET`
 
@@ -346,6 +346,38 @@ Save all entities in the arena. Like rooms, objects, containers...
 |    `peopleGender`    |  The person gender            |
 |`peopleGenderAccuracy`|  The person gender accuracy   |
 |  `peopleIsOperator`  |  Save if this is the operator |
+
+**Response content if missing element:** An empty array.
+
+### Get an entity specified by ID or Face Recognition ID
+
+**URL:** `/api/people`
+
+**Method:** `GET`
+
+**Request content:** *One of the following element. Id has priority.*
+
+|         key         |               description               |
+|:-------------------:|:---------------------------------------:|
+|     `peopleId`      |  The id of the person                   |
+|`peopleRecognitionId`|  The face recognition id of the person  |
+
+**Response content if success:**
+
+|          key         |          description          |
+|:--------------------:|:-----------------------------:|
+|      `peopleId`      |  The person Unique ID         |
+| `peopleRecognitionId`|  The face recognition ID      |
+|     `peopleColor`    |  The person color             |
+|     `peoplePose`     |  The person pose              |
+| `peoplePoseAccuracy` |  The person pose accuracy     |
+|    `peopleGender`    |  The person gender            |
+|`peopleGenderAccuracy`|  The person gender accuracy   |
+|  `peopleIsOperator`  |  Save if this is the operator |
+
+**Response content if missing element:** An empty array.
+
+
 
 # HELP
 ## PostMan
