@@ -149,11 +149,18 @@ class PeopleList(APIView):
 
     @staticmethod
     def patch(request):
-        if hasattr(request.data, 'peopleId'):
-            people = People.objects.get(peopleId__iexact=request.data['peopleId'])
+        data = request.data.dict()
+        if 'peopleId' in data:
+            try:
+                people = People.objects.get(peopleId__iexact=data['peopleId'])
+            except People.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
 
-        elif hasattr(request.data, 'peopleRecognitionId'):
-            people = People.objects.get(peopleRecognitionId__iexact=request.data['peopleRecognitionId'])
+        elif 'peopleRecognitionId' in data:
+            try:
+                people = People.objects.get(peopleRecognitionId__iexact=data['peopleRecognitionId'])
+            except People.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
 
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
