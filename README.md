@@ -286,6 +286,46 @@ Save all entities in the arena. Like rooms, objects, containers...
 |:-------------------:|:----------------------------------------------------:|
 |`peopleRecognitionId`|`people with this peopleRecognitionId already exists.`|
 
+### Update all the data about a person in the list.
+
+**URL:** `/api/people`
+
+**Method:** `PATCH`
+
+**Request content:** Need at least `peopleId` or `peopleRecognitionId` for select the person to update.
+
+|        key           |          description          | Optional |
+|:--------------------:|:-----------------------------:|:--------:|
+|      `peopleId`      |  The person ID                |          |
+| `peopleRecognitionId`|  The face recognition ID      |          |
+|     `peopleColor`    |  The person color             | &#10003; |
+|     `peoplePose`     |  The person pose              | &#10003; |
+| `peoplePoseAccuracy` |  The person pose accuracy     | &#10003; |
+|    `peopleGender`    |  The person gender            | &#10003; |
+|`peopleGenderAccuracy`|  The person gender accuracy   | &#10003; |
+|  `peopleIsOperator`  |  Save if this is the operator | &#10003; |
+
+**Response content if success:** The added element in this form
+
+|          key         |          description          |
+|:--------------------:|:-----------------------------:|
+|      `peopleId`      |  The person Unique ID         |
+| `peopleRecognitionId`|  The face recognition ID      |
+|     `peopleColor`    |  The person color             |
+|     `peoplePose`     |  The person pose              |
+| `peoplePoseAccuracy` |  The person pose accuracy     |
+|    `peopleGender`    |  The person gender            |
+|`peopleGenderAccuracy`|  The person gender accuracy   |
+|  `peopleIsOperator`  |  Save if this is the operator |
+
+**Response content if `peopleId` or `peopleRecognitionId` not exist:** Error 404 / No data
+
+**Response content if `peopleRecognitionId` already used:**
+
+|         key         |                         text                         |
+|:-------------------:|:----------------------------------------------------:|
+|`peopleRecognitionId`|`people with this peopleRecognitionId already exists.`|
+
 ### Get all persons
 
 **URL:** `/api/entity`
