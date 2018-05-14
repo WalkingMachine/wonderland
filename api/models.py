@@ -7,7 +7,7 @@ class Entity(models.Model):
     entityClass = models.CharField(max_length=30)
     entityName = models.CharField(max_length=30, null=False, blank=True)
     entityCategory = models.CharField(max_length=30, null=False, blank=True)
-    entityColor = models.CharField(max_length=30, null=True, blank=True)
+    entityColor = models.CharField(max_length=30, null=False, blank=True)
     entityWeight = models.FloatField(default=None, null=True, blank=True)
     entitySize = models.FloatField(default=None, null=True, blank=True)
 
