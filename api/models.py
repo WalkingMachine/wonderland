@@ -48,11 +48,11 @@ class People(models.Model):
 
     peopleColor = models.CharField(max_length=30, null=True, blank=True)
 
-    peopleEmotion = models.CharField(max_length=30, null=True, blank=True)
-    peopleEmotionAccuracy = models.FloatField(default=None, null=True, blank=True)
-
     peoplePose = models.CharField(max_length=30, null=True, blank=True)
     peoplePoseAccuracy = models.FloatField(default=None, null=True, blank=True)
+
+    peopleEmotion = models.CharField(max_length=30, null=True, blank=True)
+    peopleEmotionAccuracy = models.FloatField(default=None, null=True, blank=True)
 
     peopleGender = models.CharField(max_length=10, null=True, blank=True)
     peopleGenderAccuracy = models.FloatField(default=None, null=True, blank=True)
