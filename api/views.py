@@ -147,6 +147,7 @@ class PeopleList(APIView):
 
         return Response(serializer.data)
 
+    # Update a person in the arena
     @staticmethod
     def patch(request):
         data = request.data.dict()
