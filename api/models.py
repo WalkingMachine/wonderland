@@ -44,12 +44,17 @@ class People(models.Model):
     peopleId = models.AutoField(primary_key=True)
     peopleRecognitionId = models.IntegerField(null=False, blank=False, unique=True)
 
-    peopleColor = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
+    peopleName = models.CharField(max_length=30, null=True, blank=True)
 
-    peoplePose = models.CharField(max_length=30, default='Unknown', null=True, blank=True)
+    peopleColor = models.CharField(max_length=30, null=True, blank=True)
+
+    peoplePose = models.CharField(max_length=30, null=True, blank=True)
     peoplePoseAccuracy = models.FloatField(default=None, null=True, blank=True)
 
-    peopleGender = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
+    peopleEmotion = models.CharField(max_length=30, null=True, blank=True)
+    peopleEmotionAccuracy = models.FloatField(default=None, null=True, blank=True)
+
+    peopleGender = models.CharField(max_length=10, null=True, blank=True)
     peopleGenderAccuracy = models.FloatField(default=None, null=True, blank=True)
 
     peopleIsOperator = models.BooleanField(default=False)
