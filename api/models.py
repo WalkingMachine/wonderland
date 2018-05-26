@@ -5,9 +5,9 @@ from django.db import models
 class Entity(models.Model):
     entityId = models.AutoField(primary_key=True)
     entityClass = models.CharField(max_length=30)
-    entityName = models.CharField(max_length=30, null=False, blank=True)
-    entityCategory = models.CharField(max_length=30, null=False, blank=True)
-    entityColor = models.CharField(max_length=30, null=False, blank=True)
+    entityName = models.CharField(max_length=30, null=True, blank=True)
+    entityCategory = models.CharField(max_length=30, null=True, blank=True)
+    entityColor = models.CharField(max_length=30, null=True, blank=True)
     entityWeight = models.FloatField(default=None, null=True, blank=True)
     entitySize = models.FloatField(default=None, null=True, blank=True)
 
