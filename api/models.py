@@ -45,6 +45,7 @@ class People(models.Model):
     peopleRecognitionId = models.IntegerField(null=False, blank=False, unique=True)
 
     peopleName = models.CharField(max_length=30, null=True, blank=True)
+    peopleAge = models.IntegerField(null=True, blank=True)
 
     peopleColor = models.CharField(max_length=30, null=True, blank=True)
 
