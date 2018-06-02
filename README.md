@@ -9,7 +9,11 @@ This API will help [S.A.R.A](http://walkingmachine.ca) to list all object she ca
 - [Requirements](#requirements)
   * [Base](#base)
   * [Requirements](#requirements-1)
+  * [ROS packages requirements](#ros-packages-requirements)
 - [Installation](#installation)
+- [Load/dump existing data](#load/dump-exisiting-data)
+  * [Dump data from actual database](#dump-data-from-actual-database)
+  * [Load data from JSON file](load-data-from-json-file)
 - [Uses](#uses)
   * [For Entities](#for-entities)
     + [Add an entity in the list](#add-an-entity-in-the-list)
@@ -42,30 +46,36 @@ Thing you need to install
 - six==1.10.0
 - django-unixtimestampfield==0.3.9
 
+## ROS packages requirements
+ ```bash
+git clone https://github.com/DavidB-CMU/rviz_tools_py.git
+ ```
+
 # Installation
-1. First you have to install every python requirement
+1. Build your catkin workspace
+```bash
+catkin_make
+```
+
+2. Then you have to install every python requirement
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Reset database
+3. Reset database
 ```bash
 python manage.py flush
 ```
 
-3. Create a new superuser
+4. Create a new superuser
 ```bash
 python manage.py createsuperuser
 ```
 
-4. Generate a new API key
-
-> Finally the api key is not needed for use the api.
-
 5. Migration
 ```bash
 python manage.py makemigrations
-python manage.py migrate --run-syncdb 
+python manage.py migrate --run-syncdb
 ```
 
 6. Run server
@@ -77,7 +87,7 @@ python manage.py runserver
 
 ### Dump data from actual database  
 ```bash
-python manage.py dumpdata api > api/wonderland_db.json 
+python manage.py dumpdata api > api/wonderland_db.json
 ```
 
 ### Load data from JSON file
@@ -86,6 +96,19 @@ python manage.py loaddata api/wonderland_db.json
 ```
 
 # Uses
+
+## Database visualizer in RVIZ
+### Start
+```bash
+roscore
+
+rosrun map_server map_server your_map.yaml
+
+python manage.py runserver
+
+rosrun wonderland publish_objects_3D.py
+
+```
 
 ## For Entities
 
