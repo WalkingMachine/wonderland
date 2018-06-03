@@ -106,6 +106,26 @@ class EntityList(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Update a person in the arena
+    @staticmethod
+    def patch(request):
+        data = request.data.dict()
+        print data
+        if 'entityId' in data:
+            try:
+                entity = Entity.objects.get(entityId__iexact=data['entityId'])
+            except Entity.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = EntitySerializer(instance=entity, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PeopleList(APIView):
     # List all peoples
