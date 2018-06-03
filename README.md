@@ -108,7 +108,17 @@ python manage.py runserver
 
 rosrun wonderland publish_objects_3D.py
 
+rviz
+
 ```
+### Set entities position
+```bash
+rosrun wonderland set_object_position.py
+
+```
+- Use the menu to select an entity base on his ID.  
+- Select what you want to update (position or waypoint)  
+- In RViz, use the 2D 'Pose Estimate tool' to set the pose
 
 ## For Entities
 
