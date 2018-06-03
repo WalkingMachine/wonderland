@@ -163,7 +163,7 @@ class object_publisher:
                     # Publish some text using a ROS Pose Msg
                     P = Pose(Point(entity.get('entityWaypointX'), entity.get('entityWaypointY'), 0.2), Quaternion(0, 0, 0, 1))
                     scale = Vector3(0.3,0.3,0.3)
-                    self.markers.publishText(P, str(entity.get('entityClass')), 'white', scale, 3.0)  # pose, text, color, scale, lifetime
+                    self.markers.publishText(P, str(entity.get('entityClass'))+"("+str(entity.get('entityId'))+")", 'white', scale, 3.0)  # pose, text, color, scale, lifetime
 
                     # Publish a sphere using a ROS Point
                     point = Point(entity.get('entityWaypointX'), entity.get('entityWaypointY'), 0)
@@ -182,7 +182,7 @@ class object_publisher:
                     # Publish some text using a ROS Pose Msg
                     P = Pose(Point(entity.get('entityPosX'), entity.get('entityPosY'), 0.2), Quaternion(0, 0, 0, 1))
                     scale = Vector3(0.3,0.3,0.3)
-                    self.markers.publishText(P, str(entity.get('entityClass')), 'white', scale, 3.0)  # pose, text, color, scale, lifetime
+                    self.markers.publishText(P, str(entity.get('entityClass'))+"("+str(entity.get('entityId'))+")", 'white', scale, 3.0)  # pose, text, color, scale, lifetime
 
                     # Publish a sphere using a ROS Point
                     if entity.get('entityPosX') != None:
