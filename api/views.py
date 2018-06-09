@@ -34,8 +34,12 @@ class EntityList(APIView):
             for entity_container in entity_containers:
                 objects = objects.filter(
                     Q(entityContainer__entityClass__iexact=str(entity_container)) |
-                    Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
-                    Q(entityContainer__entityContainer__entityContainer__entityClass__icontains=str(entity_container)))
+                    Q(entityContainer__entityContainer__entityClass__iexact=str(entity_container)) |
+                    Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_container)))
+
+
+
+
 
         if len(objects) <= 0:
             serializer = EntitySerializer(None, many=True)
