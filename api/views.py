@@ -34,8 +34,84 @@ class EntityList(APIView):
             for entity_container in entity_containers:
                 objects = objects.filter(
                     Q(entityContainer__entityClass__iexact=str(entity_container)) |
-                    Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
-                    Q(entityContainer__entityContainer__entityContainer__entityClass__icontains=str(entity_container)))
+                    Q(entityContainer__entityContainer__entityClass__iexact=str(entity_container)) |
+                    Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_container)))
+
+            # Try again if no result with less filters
+            if len(objects) <= 0:
+                objects = Entity.objects.all()
+
+                # Filter by asked class
+                if entity_class is not None:
+                    objects = objects.filter(entityClass__iexact=str(entity_class))
+
+                # Filter by asked category
+                if entity_category is not None:
+                    objects = objects.filter(entityCategory__icontains=str(entity_category))
+
+                # Filter by asked containers
+                for entity_container in entity_containers:
+                    objects = objects.filter(
+                        Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityClass__iexact=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_container)))
+
+            # Try again if no result with less filters
+            if len(objects) <= 0:
+                objects = Entity.objects.all()
+
+                # Filter by asked class
+                if entity_class is not None:
+                    objects = objects.filter(entityClass__iexact=str(entity_class))
+
+                # Filter by asked category
+                if entity_category is not None:
+                    objects = objects.filter(entityCategory__icontains=str(entity_category))
+
+                # Filter by asked containers
+                for entity_container in entity_containers:
+                    objects = objects.filter(
+                        Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_container)))
+
+            # Try again if no result with less filters
+            if len(objects) <= 0:
+                objects = Entity.objects.all()
+
+                # Filter by asked class
+                if entity_class is not None:
+                    objects = objects.filter(entityClass__iexact=str(entity_class))
+
+                # Filter by asked category
+                if entity_category is not None:
+                    objects = objects.filter(entityCategory__icontains=str(entity_category))
+
+                # Filter by asked containers
+                for entity_container in entity_containers:
+                    objects = objects.filter(
+                        Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityContainer__entityClass__icontains=str(entity_container)))
+
+            # Try again if no result with less filters
+            if len(objects) <= 0:
+                objects = Entity.objects.all()
+
+                # Filter by asked class
+                if entity_class is not None:
+                    objects = objects.filter(entityClass__icontains=str(entity_class))
+
+                # Filter by asked category
+                if entity_category is not None:
+                    objects = objects.filter(entityCategory__icontains=str(entity_category))
+
+                # Filter by asked containers
+                for entity_container in entity_containers:
+                    objects = objects.filter(
+                        Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityContainer__entityClass__icontains=str(entity_container)))
 
         if len(objects) <= 0:
             serializer = EntitySerializer(None, many=True)
