@@ -25,7 +25,7 @@ SECRET_KEY = '3+!+41ydkfy)n$y*!s=3*!v(6ks0&oa3924w9pmpv5cml$c-9x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wonderland', 'localhost']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition

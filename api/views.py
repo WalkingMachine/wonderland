@@ -24,7 +24,7 @@ class EntityList(APIView):
         else:
             # Filter by asked class
             if entity_class is not None:
-                objects = objects.filter(entityClass__icontains=str(entity_class))
+                objects = objects.filter(entityClass__iexact=str(entity_class))
 
             # Filter by asked category
             if entity_category is not None:
@@ -33,7 +33,7 @@ class EntityList(APIView):
             # Filter by asked containers
             for entity_container in entity_containers:
                 objects = objects.filter(
-                    Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                    Q(entityContainer__entityClass__iexact=str(entity_container)) |
                     Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
                     Q(entityContainer__entityContainer__entityContainer__entityClass__icontains=str(entity_container)))
 

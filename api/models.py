@@ -42,7 +42,7 @@ class Entity(models.Model):
 # Description of an object in the arena
 class People(models.Model):
     peopleId = models.AutoField(primary_key=True)
-    peopleRecognitionId = models.IntegerField(null=False, blank=False, unique=True)
+    peopleRecognitionId = models.IntegerField(null=True, blank=True, unique=True)
 
     peopleName = models.CharField(max_length=30, null=True, blank=True)
     peopleAge = models.IntegerField(null=True, blank=True)
