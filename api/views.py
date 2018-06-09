@@ -218,3 +218,4 @@ class ClearPeople(APIView):
     @staticmethod
     def delete(request):
         People.objects.all().delete()
+        return Response()
