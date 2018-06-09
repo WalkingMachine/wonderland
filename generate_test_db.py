@@ -17,7 +17,13 @@ cupboard = Entity.objects.create(entityClass="cupboard", entityContainer=lobby) 
 
 
 # Create People
-People.objects.create(peopleRecognitionId=1, peopleColor="blue", peoplePose="seated", peoplePoseAccuracy=12.3, peopleGender="male", peopleGenderAccuracy=100.0, peopleIsOperator=False, peopleName="Jeff")
-People.objects.create(peopleRecognitionId=10, peopleColor="red", peoplePose="standing", peoplePoseAccuracy=45.6, peopleGender="female", peopleGenderAccuracy=100.0, peopleIsOperator=True, peopleName="Julie")
-People.objects.create(peopleRecognitionId=45, peopleColor="green", peoplePose="sleeping", peoplePoseAccuracy=78.9, peopleGender="male", peopleGenderAccuracy=100.0, peopleIsOperator=False, peopleName="Phil")
-People.objects.create(peopleRecognitionId=20, peopleColor="green", peoplePose="sleeping", peoplePoseAccuracy=78.9, peopleGender="female", peopleGenderAccuracy=100.0, peopleIsOperator=True, peopleName="Vero")
+
+People.objects.create(peopleRecognitionId=1, peopleAge=15, peopleColor="blue", peoplePose="lying", peoplePoseAccuracy=12.3,
+                      peopleGender="boy", peopleGenderAccuracy=100.0, peopleIsOperator=False, peopleName="Jeff")
+People.objects.create(peopleRecognitionId=10, peopleAge=25, peopleColor="red", peoplePose="sitting", peoplePoseAccuracy=45.6,
+                      peopleGender="girl", peopleGenderAccuracy=100.0, peopleIsOperator=True, peopleName="Annie-Anh")
+People.objects.create(peopleRecognitionId=45, peopleAge=43, peopleColor="green", peoplePose="pointing left", peoplePoseAccuracy=78.9,
+                      peopleGender="boy", peopleGenderAccuracy=100.0, peopleIsOperator=False, peopleName="Phil")
+People.objects.create(peopleRecognitionId=20, peopleAge=18, peopleColor="green", peoplePose="standing", peoplePoseAccuracy=78.9,
+                      peopleGender="girl", peopleGenderAccuracy=100.0, peopleIsOperator=True, peopleName="Vero")
+

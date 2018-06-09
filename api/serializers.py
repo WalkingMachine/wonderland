@@ -16,7 +16,7 @@ class EntitySerializer(serializers.ModelSerializer):
 class PeopleSerializer(serializers.ModelSerializer):
     class Meta:
         model = People
-        fields = ('peopleId', 'peopleRecognitionId', 'peopleColor', 'peopleName',
+        fields = ('peopleId', 'peopleRecognitionId', 'peopleColor', 'peopleName', 'peopleAge',
                   'peoplePose', 'peoplePoseAccuracy', 'peopleEmotion', 'peopleEmotionAccuracy',
                   'peopleGender', 'peopleGenderAccuracy', 'peopleIsOperator'
                   )
