@@ -92,11 +92,9 @@ class EntityTest(TestCase):
         response = self.client.get('/api/entity/', {'entityContainer': ['bedroom', 'table']})
         entity = json.loads(response.content)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(entity), 4)
-        self.assertEqual(entity[0]['entityId'], 14)
-        self.assertEqual(entity[1]['entityId'], 15)
-        self.assertEqual(entity[2]['entityId'], 17)
-        self.assertEqual(entity[3]['entityId'], 18)
+        self.assertEqual(len(entity), 2)
+        self.assertEqual(entity[0]['entityId'], 17)
+        self.assertEqual(entity[1]['entityId'], 18)
 
     def test_get_objects_by_category(self):
         response = self.client.get('/api/entity/', {'entityCategory': 'fruit'})
