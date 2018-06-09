@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Remove previous DB
-rm ./db.sqlite3
+sudo rm ./db.sqlite3
 
 # Initialise an empty DB
 python manage.py makemigrations
