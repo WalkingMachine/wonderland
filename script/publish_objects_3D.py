@@ -159,7 +159,12 @@ class object_publisher:
             entities = self.wonderland_get_entity()
 
             for entity in entities:
-                if str(entity.get('entityCategory')).lower() == 'rooms':
+
+                if str(entity.get('entityCategory')).lower() == 'rooms' or str(entity.get('entityCategory')).lower() == 'waypoint':
+                    color = 'orange'
+                    if str(entity.get('entityCategory')).lower() == 'waypoint':
+                        color = 'pink'
+
                     # Publish some text using a ROS Pose Msg
                     P = Pose(Point(entity.get('entityWaypointX'), entity.get('entityWaypointY'), 0.2), Quaternion(0, 0, 0, 1))
                     scale = Vector3(0.3,0.3,0.3)
@@ -168,15 +173,16 @@ class object_publisher:
                     # Publish a sphere using a ROS Point
                     point = Point(entity.get('entityWaypointX'), entity.get('entityWaypointY'), 0)
                     scale = Vector3(0.2,0.2,0.2)  # diameter
-                    color = 'orange'
+
                     self.markers.publishSphere(point, color, scale, 3.0)  # pose, color, scale, lifetime
 
                     #color = 'red'
-                    quat = quaternion_from_euler(0, 0, math.radians(entity.get('entityWaypointYaw')))
-                    P_arrow = Pose(Point(entity.get('entityWaypointX'), entity.get('entityWaypointY'), 0.0),
-                                   Quaternion(quat[0], quat[1], quat[2], quat[3]))
-                    scale_arrow = Vector3(0.5, 0.1, 0.1)  # diameter
-                    self.markers.publishArrow(P_arrow, color, scale_arrow, 3.0)
+                    if entity.get('entityWaypointYaw') != None:
+                        quat = quaternion_from_euler(0, 0, math.radians(entity.get('entityWaypointYaw')))
+                        P_arrow = Pose(Point(entity.get('entityWaypointX'), entity.get('entityWaypointY'), 0.0),
+                                       Quaternion(quat[0], quat[1], quat[2], quat[3]))
+                        scale_arrow = Vector3(0.5, 0.1, 0.1)  # diameter
+                        self.markers.publishArrow(P_arrow, color, scale_arrow, 3.0)
 
                 if str(entity.get('entityCategory')).lower() == 'furniture':
                     # Publish some text using a ROS Pose Msg
