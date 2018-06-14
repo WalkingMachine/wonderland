@@ -5,8 +5,8 @@ from django.db import models
 class Entity(models.Model):
     entityId = models.AutoField(primary_key=True)
     entityClass = models.CharField(max_length=30)
-    entityName = models.CharField(max_length=30, null=False, blank=True)
-    entityCategory = models.CharField(max_length=30, null=False, blank=True)
+    entityName = models.CharField(max_length=30, null=True, blank=True)
+    entityCategory = models.CharField(max_length=30, null=True, blank=True)
     entityColor = models.CharField(max_length=30, null=True, blank=True)
     entityWeight = models.FloatField(default=None, null=True, blank=True)
     entitySize = models.FloatField(default=None, null=True, blank=True)
@@ -42,14 +42,20 @@ class Entity(models.Model):
 # Description of an object in the arena
 class People(models.Model):
     peopleId = models.AutoField(primary_key=True)
-    peopleRecognitionId = models.IntegerField(null=False, blank=False, unique=True)
+    peopleRecognitionId = models.IntegerField(null=True, blank=True, unique=True)
 
-    peopleColor = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
+    peopleName = models.CharField(max_length=30, null=True, blank=True)
+    peopleAge = models.IntegerField(null=True, blank=True)
 
-    peoplePose = models.CharField(max_length=30, default='Unknown', null=True, blank=True)
+    peopleColor = models.CharField(max_length=30, null=True, blank=True)
+
+    peoplePose = models.CharField(max_length=30, null=True, blank=True)
     peoplePoseAccuracy = models.FloatField(default=None, null=True, blank=True)
 
-    peopleGender = models.CharField(max_length=10, default='Unknown', null=True, blank=True)
+    peopleEmotion = models.CharField(max_length=30, null=True, blank=True)
+    peopleEmotionAccuracy = models.FloatField(default=None, null=True, blank=True)
+
+    peopleGender = models.CharField(max_length=10, null=True, blank=True)
     peopleGenderAccuracy = models.FloatField(default=None, null=True, blank=True)
 
     peopleIsOperator = models.BooleanField(default=False)

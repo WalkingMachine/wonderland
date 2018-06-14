@@ -24,7 +24,7 @@ class EntityList(APIView):
         else:
             # Filter by asked class
             if entity_class is not None:
-                objects = objects.filter(entityClass__icontains=str(entity_class))
+                objects = objects.filter(entityClass__iexact=str(entity_class))
 
             # Filter by asked category
             if entity_category is not None:
@@ -33,9 +33,85 @@ class EntityList(APIView):
             # Filter by asked containers
             for entity_container in entity_containers:
                 objects = objects.filter(
-                    Q(entityContainer__entityClass__icontains=str(entity_container)) |
-                    Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
-                    Q(entityContainer__entityContainer__entityContainer__entityClass__icontains=str(entity_container)))
+                    Q(entityContainer__entityClass__iexact=str(entity_container)) |
+                    Q(entityContainer__entityContainer__entityClass__iexact=str(entity_container)) |
+                    Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_container)))
+
+            # Try again if no result with less filters
+            if len(objects) <= 0:
+                objects = Entity.objects.all()
+
+                # Filter by asked class
+                if entity_class is not None:
+                    objects = objects.filter(entityClass__iexact=str(entity_class))
+
+                # Filter by asked category
+                if entity_category is not None:
+                    objects = objects.filter(entityCategory__icontains=str(entity_category))
+
+                # Filter by asked containers
+                for entity_container in entity_containers:
+                    objects = objects.filter(
+                        Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityClass__iexact=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_container)))
+
+            # Try again if no result with less filters
+            if len(objects) <= 0:
+                objects = Entity.objects.all()
+
+                # Filter by asked class
+                if entity_class is not None:
+                    objects = objects.filter(entityClass__iexact=str(entity_class))
+
+                # Filter by asked category
+                if entity_category is not None:
+                    objects = objects.filter(entityCategory__icontains=str(entity_category))
+
+                # Filter by asked containers
+                for entity_container in entity_containers:
+                    objects = objects.filter(
+                        Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityContainer__entityClass__iexact=str(entity_container)))
+
+            # Try again if no result with less filters
+            if len(objects) <= 0:
+                objects = Entity.objects.all()
+
+                # Filter by asked class
+                if entity_class is not None:
+                    objects = objects.filter(entityClass__iexact=str(entity_class))
+
+                # Filter by asked category
+                if entity_category is not None:
+                    objects = objects.filter(entityCategory__icontains=str(entity_category))
+
+                # Filter by asked containers
+                for entity_container in entity_containers:
+                    objects = objects.filter(
+                        Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityContainer__entityClass__icontains=str(entity_container)))
+
+            # Try again if no result with less filters
+            if len(objects) <= 0:
+                objects = Entity.objects.all()
+
+                # Filter by asked class
+                if entity_class is not None:
+                    objects = objects.filter(entityClass__icontains=str(entity_class))
+
+                # Filter by asked category
+                if entity_category is not None:
+                    objects = objects.filter(entityCategory__icontains=str(entity_category))
+
+                # Filter by asked containers
+                for entity_container in entity_containers:
+                    objects = objects.filter(
+                        Q(entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityClass__icontains=str(entity_container)) |
+                        Q(entityContainer__entityContainer__entityContainer__entityClass__icontains=str(entity_container)))
 
         if len(objects) <= 0:
             serializer = EntitySerializer(None, many=True)
@@ -106,6 +182,27 @@ class EntityList(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Update a person in the arena
+    @staticmethod
+    def patch(request):
+        data = request.data.dict()
+        print data
+        if 'entityId' in data:
+            try:
+                entity = Entity.objects.get(entityId__iexact=data['entityId'])
+            except Entity.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = EntitySerializer(instance=entity, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class PeopleList(APIView):
     # List all peoples
@@ -119,6 +216,7 @@ class PeopleList(APIView):
         people_pose = request.query_params.get('peoplePose', None)
         people_gender = request.query_params.get('peopleGender', None)
         people_is_operator = request.query_params.get('peopleIsOperator', None)
+        people_age = request.query_params.get('peopleAge', None)
 
         if people_id is not None:
             objects = objects.filter(peopleId__iexact=people_id)
@@ -136,6 +234,8 @@ class PeopleList(APIView):
                 objects = objects.filter(peopleGender__iexact=people_gender)
             if people_is_operator is not None:
                 objects = objects.filter(peopleIsOperator__iexact=people_is_operator)
+            if people_age is not None:
+                objects = objects.filter(peopleAge__iexact=people_age)
 
         if people_id is not None or people_recognition_id is not None:
             if len(objects) <= 0:
@@ -147,6 +247,7 @@ class PeopleList(APIView):
 
         return Response(serializer.data)
 
+    # Update a person in the arena
     @staticmethod
     def patch(request):
         data = request.data.dict()
@@ -187,3 +288,11 @@ class PeopleList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ClearPeople(APIView):
+    # List all peoples
+    @staticmethod
+    def delete(request):
+        People.objects.all().delete()
+        return Response()
