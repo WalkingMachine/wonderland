@@ -11,7 +11,13 @@ then
     ./manage.py dumpdata > "backup/backup-$(date +'%m%d%y-%R').json"
 
     # Remove previous DB
-    sudo rm ./db.sqlite3
+    if [ -f "db.sqlite3" ];
+    then
+      rm ./db.sqlite3
+      echo The db have been removed
+    else
+      echo The db is already deleted
+    fi
 
     # Initialise an empty DB
     python manage.py makemigrations
@@ -19,10 +25,9 @@ then
 
     # Create a superuser
     echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', '', 'admin')" | python manage.py shell
-    
+
     # Start server
-    echo "START DJANGO SERVER" 
+    echo "START DJANGO SERVER"
     python manage.py runserver
 
 fi
-
