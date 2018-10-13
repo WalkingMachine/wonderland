@@ -6,7 +6,7 @@
 sudo apt install python python-pip python-dev -y
 
 # Install requirements
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 
 # Prepare application
 python manage.py flush --noinput
